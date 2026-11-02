@@ -1,11 +1,11 @@
-DSCH 2.6h
-VERSION 4/8/2003 9:45:45 AM
+DSCH 3.5
+VERSION 02-11-2026 21:10:18
 BB(21,-220,109,-165)
 SYM  #and2
 BB(55,-185,90,-165)
 TITLE 67 -174  #&
 MODEL 402
-PROP                                                                                                                                                                                                            
+PROP                                                                                                                                    
 REC(15,-210,0,0,)
 VIS 0
 PIN(55,-170,0.000,0.000)b
@@ -23,13 +23,13 @@ LIG(79,-169,74,-166)
 LIG(74,-166,63,-165)
 LIG(63,-185,74,-184)
 LIG(55,-180,63,-180)
-VLG   and and2(out,a,b);
+VLG and and2(out,a,b);
 FSYM
 SYM  #xor2
 BB(50,-215,85,-195)
 TITLE 67 -205  #^
 MODEL 602
-PROP                                                                                                                                                                                                            
+PROP                                                                                                                                    
 REC(15,-210,0,0,)
 VIS 0
 PIN(50,-210,0.000,0.000)a
@@ -58,13 +58,13 @@ LIG(61,-205,60,-202)
 LIG(60,-202,58,-198)
 LIG(50,-210,59,-210)
 LIG(50,-200,59,-200)
-VLG   xor xor2(out,a,b);
+VLG xor xor2(out,a,b);
 FSYM
 SYM  #button2
 BB(21,-199,30,-191)
-TITLE 25 -195  #button
+TITLE 25 -195  #button1
 MODEL 59
-PROP                                                                                                                                                                                                            
+PROP                                                                                                                                    
 REC(22,-198,6,6,r)
 VIS 1
 PIN(30,-195,0.000,0.000)B
@@ -80,9 +80,9 @@ LIG(22,-198,28,-198)
 FSYM
 SYM  #button1
 BB(21,-214,30,-206)
-TITLE 25 -210  #button
+TITLE 25 -210  #button2
 MODEL 59
-PROP                                                                                                                                                                                                            
+PROP                                                                                                                                    
 REC(22,-213,6,6,r)
 VIS 1
 PIN(30,-210,0.000,0.000)A
@@ -98,9 +98,9 @@ LIG(22,-213,28,-213)
 FSYM
 SYM  #light1
 BB(103,-190,109,-176)
-TITLE 105 -175  #light
+TITLE 105 -175  #light1
 MODEL 49
-PROP                                                                                                                                                                                                            
+PROP                                                                                                                                    
 REC(104,-188,4,5,r)
 VIS 1
 PIN(105,-175,0.000,0.000)Carry
@@ -121,9 +121,9 @@ LIG(107,-189,105,-189)
 FSYM
 SYM  #light2
 BB(98,-220,104,-206)
-TITLE 100 -205  #light
+TITLE 100 -205  #light2
 MODEL 49
-PROP                                                                                                                                                                                                            
+PROP                                                                                                                                    
 REC(99,-218,4,5,r)
 VIS 1
 PIN(100,-205,0.000,0.000)Sum
@@ -155,4 +155,4 @@ LIG(40,-195,40,-170)
 LIG(55,-180,45,-180)
 LIG(90,-175,105,-175)
 LIG(85,-205,100,-205)
-FFIG C:\Documents and Settings\Administrator\My Documents\Dsch2\Book on CMOS\Exp08_mux2to1.sch
+FFIG C:\Users\admin\Desktop\praticals\prac-AD-ASSIC\ASSIC\DSch_files\Exp07_mux2to1.sch

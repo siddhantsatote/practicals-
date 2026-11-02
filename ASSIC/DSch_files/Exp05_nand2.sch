@@ -1,5 +1,5 @@
-DSCH 3.1
-VERSION 21/07/2007 20:25:24
+DSCH 3.5
+VERSION 02-11-2026 21:09:59
 BB(-59,-105,39,-20)
 SYM  #button2c
 BB(-59,-54,-50,-46)
@@ -196,4 +196,4 @@ LIG(-50,-50,-40,-50)
 LIG(-10,-70,15,-70)
 LIG(-30,-70,-50,-70)
 LIG(-30,-80,-30,-70)
-FFIG D:\Documents and Settings\sicard\Mes documents\software\Dsch31\examples\nand2Cmos.sch
+FFIG C:\Users\admin\Desktop\praticals\prac-AD-ASSIC\ASSIC\DSch_files\Exp05_nand2.sch

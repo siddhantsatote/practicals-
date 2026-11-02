@@ -1,14 +1,13 @@
-DSCH 3.1
-VERSION 02-11-2026 19:45:00
-BB(-50,-100,50,0)
+DSCH 3.5
+VERSION 02-11-2026 21:10:07
+BB(-50,-95,36,-16)
 SYM  #buttonIN
 BB(-50,-54,-41,-46)
-TITLE -46 -50  #button
+TITLE -46 -50  #button1
 MODEL 59
-PROP
+PROP                                                                                                                                   
 REC(-49,-53,6,6,r)
 VIS 1
-PIN(-41,-50,0.000,0.000)IN
 LIG(-42,-50,-41,-50)
 LIG(-50,-46,-50,-54)
 LIG(-42,-46,-50,-46)
@@ -21,12 +20,11 @@ LIG(-49,-53,-43,-53)
 FSYM
 SYM  #buttonEN
 BB(-30,-24,-21,-16)
-TITLE -26 -20  #button
+TITLE -26 -20  #button2
 MODEL 59
-PROP
+PROP                                                                                                                                   
 REC(-29,-23,6,6,r)
 VIS 1
-PIN(-21,-20,0.000,0.000)EN
 LIG(-22,-20,-21,-20)
 LIG(-30,-16,-30,-24)
 LIG(-22,-16,-30,-16)
@@ -39,12 +37,11 @@ LIG(-29,-23,-23,-23)
 FSYM
 SYM  #buttonENB
 BB(-30,-84,-21,-76)
-TITLE -26 -80  #button
+TITLE -26 -80  #button3
 MODEL 59
-PROP
+PROP                                                                                                                                   
 REC(-29,-83,6,6,r)
 VIS 1
-PIN(-21,-80,0.000,0.000)EN_bar
 LIG(-22,-80,-21,-80)
 LIG(-30,-76,-30,-84)
 LIG(-22,-76,-30,-76)
@@ -59,10 +56,9 @@ SYM  #pmos
 BB(-10,-80,10,-60)
 TITLE 5 -70  #pmos
 MODEL 902
-PROP   2.0u 0.12u
+PROP                                                                                                                                   
 REC(-9,-75,19,15,r)
 VIS 0
-PIN(-10,-70,0.000,0.000)gate
 PIN(10,-80,0.000,0.000)source
 PIN(10,-60,1.000,0.210)drain
 LIG(-10,-70,-4,-70)
@@ -79,10 +75,9 @@ SYM  #nmos
 BB(-10,-40,10,-20)
 TITLE 5 -30  #nmos
 MODEL 901
-PROP   1.0u 0.12u
+PROP                                                                                                                                   
 REC(-9,-35,19,15,r)
 VIS 0
-PIN(-10,-30,0.000,0.000)gate
 PIN(10,-20,0.000,0.000)source
 PIN(10,-40,1.000,0.210)drain
 LIG(0,-30,-10,-30)
@@ -96,12 +91,11 @@ VLG nmos nmos(drain,source,gate);
 FSYM
 SYM  #lightOUT
 BB(30,-57,36,-43)
-TITLE 32 -43  #light
+TITLE 32 -43  #light1
 MODEL 49
-PROP
+PROP                                                                                                                                   
 REC(31,-55,4,5,r)
 VIS 1
-PIN(32,-42,0.000,0.000)OUT
 LIG(35,-50,35,-55)
 LIG(35,-55,34,-56)
 LIG(31,-55,31,-50)
@@ -121,12 +115,12 @@ CNC(-25 -50)
 CNC(20 -50)
 LIG(-41,-50,-25,-50)
 LIG(-25,-50,-25,-80)
-LIG(-25,-80,10,-80)
-LIG(-25,-50,-25,-20)
 LIG(-25,-20,10,-20)
-LIG(-21,-20,-10,-20)
+LIG(-25,-50,-25,-20)
+LIG(-10,-20,10,-20)
+LIG(-10,-20,10,-20)
 LIG(-10,-20,-10,-30)
-LIG(-21,-80,-10,-80)
+LIG(-25,-20,10,-20)
 LIG(-10,-80,-10,-70)
 LIG(10,-60,20,-60)
 LIG(20,-60,20,-50)
@@ -134,5 +128,9 @@ LIG(10,-40,20,-40)
 LIG(20,-40,20,-50)
 LIG(20,-50,32,-50)
 LIG(32,-50,32,-42)
+LIG(-25,-80,10,-80)
+LIG(-10,-80,10,-80)
+LIG(-10,-80,10,-80)
+LIG(-25,-80,10,-80)
 TEXT -40 -95  #CMOS Transmission Gate (TG)
-FFIG Exp07_transmission_gate.sch
+FFIG C:\Users\admin\Desktop\praticals\prac-AD-ASSIC\ASSIC\DSch_files\Exp07_transmission_gate.sch

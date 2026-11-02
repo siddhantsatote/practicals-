@@ -253,11 +253,11 @@ REC(234,-88,2,4,DN)
 REC(226,-89,2,6,DN)
 TITLE 223 -55  #Bit Line (BL)
 $w 1000 0 8 0.00 0 1.00 1 2.00 3 3.00 0 4.00 1 5.00 3 7.00 3 8.00 3 
-TITLE 251 -62  #vdd
+TITLE 220 -62  #vdd
 $1 1000 0 
 TITLE 243 -81  #Data
 $v 1000 0 
-TITLE 251 -77  #Vss
+TITLE 220 -77  #Vss
 $0 1000 0 
 TITLE 255 -56  #~Bit Line (~BL)
 $w 1000 0 8 0.00 1 1.00 0 2.00 3 3.00 1 4.00 0 5.00 3 7.00 3 8.00 3 
@@ -271,11 +271,11 @@ TITLE 297 -82  #~Data
 $- 1000 0 
 TITLE 317 -57  #~Bit Line (~BL)
 $- 1000 0 
-TITLE 313 -78  #Vss
+TITLE 282 -78  #Vss
 $0 1000 0 
 TITLE 305 -82  #Data
 $- 1000 0 
-TITLE 313 -63  #vdd
+TITLE 282 -63  #vdd
 $1 1000 0 
 TITLE 285 -56  #Bit Line (BL)
 $- 1000 0 
