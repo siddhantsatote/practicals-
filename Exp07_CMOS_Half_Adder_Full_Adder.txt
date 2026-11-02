@@ -1,0 +1,182 @@
+==============================================================
+EXPERIMENT 7 : CMOS HALF ADDER AND FULL ADDER
+Complete start-to-finish guide  (tool: Microwind)
+==============================================================
+
+NOTE ON MENU NAMES
+Microwind menus and icon names differ a little between versions
+(your journal shows 3.9). If an item is not exactly where this guide
+says, look in the neighbouring menu or hover over the palette icons.
+
+AIM
+To design a CMOS half adder and full adder in Microwind and verify
+their truth tables by simulation.
+
+EQUATIONS AND TRUTH TABLES
+  Half adder:  Sum = A xor B   Carry = A and B
+     A B | Sum Carry
+     0 0 |  0    0
+     0 1 |  1    0
+     1 0 |  1    0
+     1 1 |  0    1
+
+  Full adder:  Sum = A xor B xor Cin
+               Cout = A.B + Cin.(A xor B)
+     A B Cin | Sum Cout
+     0 0  0  |  0   0
+     0 0  1  |  1   0
+     0 1  0  |  1   0
+     0 1  1  |  0   1
+     1 0  0  |  1   0
+     1 0  1  |  0   1
+     1 1  0  |  0   1
+     1 1  1  |  1   1
+
+
+--------------------------------------------------------------
+PART 1 : GET MICROWIND AND SET UP
+--------------------------------------------------------------
+1. Lab PC: start MICROWIND from the Start menu. Own laptop: go to
+   microwind.net > Downloads > download the MICROWIND student version >
+   install with defaults > start it.
+2. Make a folder  C:\ADCMOS\Exp7
+3. Menu: File > Select Foundry > choose the rule file your lab uses
+   (the same one as for the other experiments; ask the lab teacher)
+   > Open. Then File > New.
+
+
+==============================================================
+METHOD 1 : AUTOMATIC LAYOUT FROM VERILOG (recommended, error-free)
+==============================================================
+
+HALF ADDER
+4. Open Notepad (Start menu > type Notepad). Type:
+        module half_adder(input A, input B, output S, output C);
+          assign S = A ^ B;
+          assign C = A & B;
+        endmodule
+5. Notepad: File > Save As. Folder C:\ADCMOS\Exp7. File name
+   half_adder.v . "Save as type": All Files (important, otherwise it
+   saves as half_adder.v.txt). Save.
+6. In Microwind: File > New. Then menu: Compile > Compile Verilog
+   File. Browse to half_adder.v, click Open.
+7. The layout is generated automatically. Zoom to fit using the
+   View menu (View > Zoom All) if needed. File > Save As >
+   half_adder.MSK.
+8. Check the inputs have clocks: if the input pins A and B show a
+   clock property, fine. If not, click the Clock icon in the palette,
+   click on pin A, set period 200 ps, OK. Do the same for B with a
+   period of 400 ps (so all four combinations occur).
+9. Add a Visible node on S and on C: click the Visible node icon,
+   click on each output.
+10. Analysis > Design Rule Checker > run.
+11. Simulate > Run Simulation. Tab "Voltage vs time". Click Run.
+    Set Time Scale so that at least 800 ps fits; click More to extend.
+12. Compare S and C with the half adder truth table at each of the
+    four input combinations. Screenshot (Windows key + Shift + S).
+
+FULL ADDER
+13. In Notepad type:
+        module full_adder(input A, input B, input Cin,
+                          output Sum, output Cout);
+          assign Sum  = A ^ B ^ Cin;
+          assign Cout = (A & B) | (Cin & (A ^ B));
+        endmodule
+14. Save As full_adder.v (All Files type) in C:\ADCMOS\Exp7.
+15. In Microwind: File > New > Compile > Compile Verilog File >
+    full_adder.v > Open.
+16. Clocks: A = 200 ps, B = 400 ps, Cin = 800 ps. Visible nodes on
+    Sum and Cout.
+17. DRC, then Simulate > Run Simulation > Voltage vs time > Run,
+    with a time scale long enough to cover 800 ps or more (all eight
+    input rows), click More if needed.
+18. Compare Sum and Cout with the full-adder truth table for each
+    of the eight rows. Screenshot.
+
+FULL ADDER FROM TWO HALF ADDERS (matches your journal theory)
+19. Save this as full_adder2.v and compile the same way:
+        module half_adder(input A, input B, output S, output C);
+          assign S = A ^ B;
+          assign C = A & B;
+        endmodule
+        module full_adder2(input A, input B, input Cin,
+                           output Sum, output Cout);
+          wire s1, c1, c2;
+          half_adder h1(A, B, s1, c1);
+          half_adder h2(s1, Cin, Sum, c2);
+          assign Cout = c1 | c2;
+        endmodule
+    Note: in Microwind keep the top module the LAST one in the file.
+
+
+==============================================================
+METHOD 2 : MANUAL TRANSISTOR LAYOUT OF THE HALF ADDER
+(as in your journal figure; uses 16 transistors)
+==============================================================
+20. File > New, Save As half_adder_manual.MSK.
+21. TWO INVERTERS to make Abar and Bbar
+    Each inverter: MOS generator > n-MOS (W 0.08 um, L 0.03 um, 1
+    gate) and p-MOS (W 0.108 um, L 0.03 um, 1 gate), p-MOS above
+    n-MOS, poly joined, sources to the rails, drains joined for the
+    output. Build one, then copy it: select it with the mouse
+    (Edit > Select), Edit > Copy, Edit > Paste, drop it beside the
+    first.
+22. SUM BLOCK (8 transistors) - place in a row between VDD and VSS
+    PULL-UP (4 PMOS):
+      a. Two PMOS in parallel, gates = Abar and Bbar (M5, M6).
+         Their sources go to VDD; their drains join at a node N1.
+      b. Two PMOS in parallel, gates = A and B (M7, M8). Their sources
+         join at N1; their drains join at the SUM node.
+    PULL-DOWN (4 NMOS):
+      c. NMOS M9 (gate A) in series with NMOS M11 (gate B): from SUM to
+         VSS.
+      d. NMOS M10 (gate Abar) in series with NMOS M12 (gate Bbar): also
+         from SUM to VSS, in parallel with the chain in (c).
+    All MOS: use the MOS generator with L = 0.03 um, W = 0.108 um for
+    PMOS and 0.16 um for NMOS (series stacks need wider NMOS).
+23. CARRY BLOCK (4 transistors)
+      a. Two PMOS in series (gates Abar, Bbar): source of the first to
+         VDD, drain of the second to the CARRY node.
+      b. Two NMOS in parallel (gates Abar, Bbar): sources to VSS, drains
+         to the CARRY node.
+    This gives Carry = NOR(Abar, Bbar) = A and B.
+24. WIRING
+    Poly (red) for each gate wire; Metal 1 (blue) for source/drain
+    wires; place a contact (palette: contact diffusion/metal or
+    poly/metal) wherever a wire of one layer meets another.
+    Rails: Metal 1 boxes for VDD (top) and VSS (bottom).
+25. Palette icons: Vdd on the top rail, Vss on the bottom rail, Clock
+    on A (200 ps) and B (400 ps), Visible node on SUM and CARRY.
+26. Analysis > Design Rule Checker, then Simulate > Run Simulation >
+    Voltage vs time > Run. Verify four input combinations. Your
+    journal screenshot shows A = 1, B = 1 giving Sum = 0 and Carry = 1.
+27. Screenshot layout and waveforms.
+
+
+--------------------------------------------------------------
+WRITE THIS IN YOUR JOURNAL
+--------------------------------------------------------------
+Observation tables
+  Half adder:  A B | S (measured) C (measured)
+               0 0 |  ____        ____
+               0 1 |  ____        ____
+               1 0 |  ____        ____
+               1 1 |  ____        ____
+  Full adder:  fill all 8 rows with Sum and Cout from the waveforms.
+
+Conclusion
+  "The CMOS half adder produces Sum = A xor B and Carry = A.B. Two
+  half adders and an OR gate form a full adder with Sum = A xor B xor
+  Cin. The Microwind simulation matched the truth table in every row."
+
+
+--------------------------------------------------------------
+IF SOMETHING GOES WRONG
+--------------------------------------------------------------
+Compile gives an error: file saved as .txt, or a missing semicolon
+   or "endmodule".
+Layout very large: normal for Verilog output; use View > Zoom All.
+Outputs not changing: no clock on the inputs. Add them with the
+   Clock icon.
+Only some input combinations seen: make the clock periods different
+   (A short, B twice as long, Cin four times as long).

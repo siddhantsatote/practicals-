@@ -1,0 +1,13 @@
+* EXP 5 - CASCODE CURRENT MIRROR, OPERATING POINT - LTspice: File > Open, then Run
+* After Run read currents: View > SPICE Output Log (Ctrl+L)
+* Lab model: delete .model line, add ".lib AP9465GEM.lib", replace NMOD with the model name.
+.model NMOD NMOS(Kp=0.2 Vto=1.5 Lambda=0.02)
+VDD vdd 0 30
+Rref vdd va 100
+M0 va va vx 0 NMOD W=10u L=1u
+M1 vx vx 0 0 NMOD W=10u L=1u
+VM vb 0 35
+M3 vb va vy 0 NMOD W=10u L=1u
+M2 vy vx 0 0 NMOD W=10u L=1u
+.op
+.end

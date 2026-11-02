@@ -1,0 +1,15 @@
+* EXP 3 (B) - DIFFERENTIAL AMPLIFIER, ACTIVE (PMOS) LOAD - LTspice: File > Open, then Run
+* Lab models: delete .model lines, add ".lib AP9465GEM.lib" and ".lib FDS4559.lib",
+* then use the model names found inside those files.
+.model NMOD NMOS(Kp=0.2 Vto=1.5 Lambda=0.02)
+.model PMOD PMOS(Kp=0.1 Vto=-1.5 Lambda=0.02)
+VDD1 vdd 0 12
+M5  vo3 vo3 vdd vdd PMOD W=3u L=10u
+M6  vo4 vo4 vdd vdd PMOD W=3u L=10u
+M4  vo3 g3 tail tail NMOD W=47u L=10u
+M3  vo4 g4 tail tail NMOD W=47u L=10u
+ISS2 tail 0 30m
+V3  g3 0 SINE(0 0.001 1k)
+V4  g4 0 SINE(0 0.01 1k)
+.tran 10m
+.end

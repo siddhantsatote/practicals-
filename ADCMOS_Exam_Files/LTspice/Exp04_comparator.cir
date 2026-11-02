@@ -1,0 +1,8 @@
+* EXP 4 - NON-INVERTING COMPARATOR - LTspice: File > Open, then Run
+* Ideal high-gain comparator (behavioural source). Output saturates at +/-11 V.
+Vin vin 0 SINE(0 1 1k)
+Vref vref 0 0.3
+Bcomp vo 0 V=11*tanh(1000*(V(vin)-V(vref)))
+Rload vo 0 1k
+.tran 5m
+.end

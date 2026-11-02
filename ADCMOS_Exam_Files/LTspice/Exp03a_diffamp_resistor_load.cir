@@ -1,0 +1,21 @@
+* EXP 3 (A) - DIFFERENTIAL AMPLIFIER, RESISTOR LOAD - LTspice: File > Open, then Run
+* Lab model: delete .model line, add ".lib AP9465GEM.lib", replace NMOD with the model name.
+.model NMOD NMOS(Kp=0.2 Vto=1.5 Lambda=0.02)
+VDD vdd 0 12
+RD  vdd vo1 100
+RD2 vdd vo2 100
+M1  vo1 g1 tail tail NMOD W=47u L=10u
+M2  vo2 g2 tail tail NMOD W=47u L=10u
+ISS tail 0 30m
+V1  g1 0 SINE(0 0.1 1k)
+V2  g2 0 SINE(0 0.001 1k)
+* ---- LOADS: remove the * in front of ONE line at a time ----
+*RL  vo1 0 1k
+*CL  vo1 0 100n
+*LL  vo1 0 1m
+*RLC: R series L series C
+*R3  vo1 n1 100
+*L3  n1 n2 1m
+*C3  n2 0 100n
+.tran 10m
+.end

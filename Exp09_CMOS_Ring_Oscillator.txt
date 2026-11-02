@@ -1,0 +1,152 @@
+==============================================================
+EXPERIMENT 9 : CMOS RING OSCILLATOR
+Complete start-to-finish guide  (tool: Microwind)
+==============================================================
+
+NOTE ON MENU NAMES
+Microwind menus and icon names differ a little between versions
+(your journal shows 3.9). If an item is not exactly where this guide
+says, look in the neighbouring menu or hover over the palette icons.
+
+AIM
+To design and simulate a CMOS ring oscillator made of an odd number of
+inverters, and measure its oscillation frequency.
+
+THEORY YOU NEED
+  A ring oscillator is an odd number n of inverters in a loop: the
+  output of the last inverter feeds the input of the first. The
+  circuit has no stable state, so it oscillates.
+  Frequency  f = 1 / (2 x n x td)
+  where td is the propagation delay of one inverter.
+  Smallest ring: n = 3. More stages = lower frequency.
+  A smaller technology node = smaller td = higher frequency.
+
+
+--------------------------------------------------------------
+PART 1 : GET MICROWIND AND SET UP
+--------------------------------------------------------------
+1. Lab PC: start MICROWIND. Own laptop: microwind.net > Downloads >
+   download the MICROWIND student version > install > start it.
+2. Make folder C:\ADCMOS\Exp9
+3. File > Select Foundry > choose the lab's rule file (your journal
+   inverter uses L = 0.03 um) > Open. File > New.
+4. File > Save As > C:\ADCMOS\Exp9 > ring5.MSK > Save.
+
+
+--------------------------------------------------------------
+PART 2 : DRAW ONE INVERTER
+--------------------------------------------------------------
+5. NMOS: palette > MOS generator icon. Choose n-MOS, Width 0.08 um,
+   Length 0.03 um, Number of gates 1 > Generate device > left-click
+   in the lower part of the drawing area to drop it.
+6. PMOS: MOS generator > p-MOS, Width 0.108 um, Length 0.03 um, 1
+   gate > Generate device > drop it directly above the NMOS so that
+   the two red poly lines line up.
+7. Poly (red icon): draw a short vertical red strip joining the two
+   gates. Place a poly contact on it (palette: contact poly/metal)
+   and a short blue stub to the LEFT: that is the inverter input.
+8. Rails: Metal 1 icon (blue). Draw a long horizontal strip above the
+   PMOS (VDD) and one below the NMOS (VSS). Make them long enough for
+   5 inverters side by side (about 6 times the width of one inverter).
+9. Sources: blue strip from the PMOS LEFT contact up to VDD; blue strip
+   from the NMOS LEFT contact down to VSS.
+10. Output: blue vertical strip joining the PMOS RIGHT contact to the
+    NMOS RIGHT contact. Add a small stub to the right.
+11. Check this single inverter first: add Vdd on the top rail, Vss on
+    the bottom rail, a Clock on the input and a Visible node on the
+    output; Simulate > Run Simulation and confirm it inverts. Then
+    remove the Clock (select it and press Delete) before building the
+    ring.
+
+
+--------------------------------------------------------------
+PART 3 : MAKE 5 STAGES AND CLOSE THE RING
+--------------------------------------------------------------
+12. Select the whole inverter with the mouse (Edit > Select, then
+    drag a box around it, rails excluded or included as you prefer).
+13. Edit > Duplicate XY (if available): set number of copies in X to
+    4 and spacing so that copies sit side by side with rails
+    lining up; click OK.
+    If that menu item is not available: Edit > Copy, then Edit >
+    Paste, drop the copy to the right, repeat until there are 5
+    inverters in a row. The rails should join into one long VDD and
+    one long VSS strip.
+14. CONNECT STAGES
+    For each pair of neighbours, draw a Metal 1 strip from the
+    output stub of inverter k to the input stub of inverter k+1.
+15. CLOSE THE LOOP
+    Use Metal 2 (palette: Metal 2 icon, magenta) to run a long strip
+    from the output of inverter 5, over the top of the circuit, back
+    to the input of inverter 1. At each end place a via (palette:
+    contact metal/metal2 or "via") so that Metal 2 joins the Metal 1
+    stub.
+16. PROPERTIES
+    a. Vdd icon > click on the top rail.
+    b. Vss icon > click on the bottom rail.
+    c. Visible node icon > click on the output of inverter 5; click
+       again on the output of inverter 2 (to see two points of the
+       ring).
+    d. Do NOT add any Clock: the ring drives itself.
+17. Analysis > Design Rule Checker > fix any errors.
+
+
+--------------------------------------------------------------
+PART 4 : SIMULATE AND MEASURE
+--------------------------------------------------------------
+18. Simulate > Run Simulation. Tab "Voltage vs time". Click Run.
+    Set Time Scale to about 1 ns per division (or the smallest that
+    shows several cycles). Click More to extend if needed.
+19. You should see a square-like wave appearing after a short
+    start-up transient. (Your LTspice journal plot shows the same
+    behaviour: a start-up spike, then a rectangular wave.)
+20. MEASURE THE PERIOD
+    a. Tick Evaluate > Frequency (in the Evaluate box of the
+       simulation window) and pick the output node. Microwind prints
+       the frequency.
+    b. Or tick Delay and click two consecutive rising edges; the
+       time difference is the period T. f = 1/T.
+21. Compute td = T / (2 n) = T / 10 for 5 stages.
+22. Repeat with 3 stages (delete two inverters and reconnect the
+    loop) and 7 stages (add two more). Fill the table below.
+23. Screenshot the layout and the waveform.
+
+
+--------------------------------------------------------------
+PART 5 : LTSPICE VERSION (your journal figure, optional)
+--------------------------------------------------------------
+24. LTspice: File > New Schematic. Place PMOS+NMOS pairs (F2, type
+    pmos / nmos), connect each output to the next gate, the last back
+    to the first, add one DC source for VDD, ground the NMOS sources,
+    place .tran 1.3u and, if it does not start, .ic V(n001)=0 (S key
+    for directives). Plot the output node.
+
+
+--------------------------------------------------------------
+PART 6 : WRITE THIS IN YOUR JOURNAL
+--------------------------------------------------------------
+  Stages n   Period T (ps)   Frequency f = 1/T   td = T/(2n)
+  3          ____            ____                ____
+  5          ____            ____                ____
+  7          ____            ____                ____
+
+Observation
+  "The output is a square wave. Frequency decreases as the number of
+  stages increases and increases at lower technology nodes."
+Conclusion
+  "A CMOS ring oscillator was designed and simulated in Microwind.
+  The oscillation frequency depends on the inverter delay, which is a
+  function of the technology node, supply voltage and load
+  capacitance."
+
+
+--------------------------------------------------------------
+IF SOMETHING GOES WRONG
+--------------------------------------------------------------
+Output stays flat: even number of stages; loop wire missing; metal 2
+   via missing at one end. Count inverters and trace the loop.
+Click Reset in the simulation window, then Run again; sometimes the
+   start-up needs a second try.
+Frequency looks too high or low: check which node you measured and
+   the time scale.
+DRC errors on metal 2: keep it at least the minimum spacing from the
+   metal 1 wires below.

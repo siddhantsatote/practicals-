@@ -1,0 +1,202 @@
+==============================================================
+EXPERIMENT 3 : DIFFERENTIAL AMPLIFIER WITH VARIOUS LOADS
+Complete start-to-finish guide  (tool: LTspice)
+==============================================================
+
+WHY LTSPICE AND NOT MICROWIND
+Your journal shows this experiment in LTspice (AP9465GEM and
+FDS4559_P transistors, 30 mA tail current, .tran 10ms). Microwind
+cannot use those vendor models or a current-source tail, so LTspice
+is used.
+
+AIM
+To build a differential pair, measure differential gain, common-mode
+gain and CMRR, and see how resistive, capacitive, inductive and RLC
+loads change the output.
+
+FINAL CIRCUITS
+ CIRCUIT A (resistor load)           CIRCUIT B (active load)
+  VDD = 12 V                          VDD1 = 12 V
+  RD = RD2 = 100 ohm                  M5, M6 = FDS4559_P (PMOS),
+  M1, M2 = AP9465GEM                    each with gate tied to its own
+  V1 = SINE(0 0.1 1k)                   drain (diode-connected)
+  V2 = SINE(0 0.001 1k)               M3, M4 = AP9465GEM
+  ISS1 = 30 mA tail                   V3 = SINE(0 0.001 1k)
+  Outputs VO1, VO2                    V4 = SINE(0 0.01 1k)
+  .tran 10ms                          ISS2 = 30 mA tail, outputs VO3, VO4
+
+
+--------------------------------------------------------------
+PART 1 : GET SOFTWARE AND MODELS
+--------------------------------------------------------------
+1. LTspice: analog.com > search "LTspice" > Download for Windows >
+   install with defaults. (Lab PC already has it.)
+2. Create folder  C:\ADCMOS\Exp3
+3. AP9465GEM.lib: search the web for "AP9465GEM SPICE model" (APEC,
+   a-poweric.com) or get it from your lab teacher. Save it in
+   C:\ADCMOS\Exp3
+4. FDS4559 model: search "FDS4559 SPICE model" (onsemi website, or
+   ask the lab). Save as FDS4559.lib in the same folder. In Notepad,
+   find the .MODEL lines and note the name of the P-channel one
+   (journal uses FDS4559_P).
+5. Open AP9465GEM.lib in Notepad, find the first .MODEL or .SUBCKT
+   line, note the name and whether it is NMOS or PMOS. Use the
+   matching LTspice symbol (nmos or pmos).
+   No model files? Use built-in parts with these lines:
+     .model NMOD NMOS(Kp=0.2 Vto=1.5 Lambda=0.02)
+     .model PMOD PMOS(Kp=0.1 Vto=-1.5 Lambda=0.02)
+   and set transistor Values to NMOD / PMOD. Numbers will differ.
+
+
+--------------------------------------------------------------
+PART 2 : CIRCUIT A (RESISTOR-LOADED PAIR)
+--------------------------------------------------------------
+6. LTspice: File > New Schematic. File > Save As >
+   C:\ADCMOS\Exp3\diffamp.asc.
+
+Keys: F2 component, F3 wire, F4 net label, G ground, S directive,
+Ctrl+R rotate, Ctrl+E mirror, F5 delete, F7 move, Esc stop.
+
+7. Transistors M1, M2
+   F2, type nmos, OK, drop one on the left; drop the second to the
+   right of it (mirror it with Ctrl+E if you want it symmetric).
+   For each: right-click > if your model is in the "Pick New MOSFET"
+   list select it; else Cancel and Ctrl+right-click the transistor,
+   type the model name in Value. Rename to M1 and M2.
+8. Resistors: F2, type res. Drop two above the transistors.
+   Right-click each > Resistance 100. Rename RD and RD2.
+9. Voltage sources: F2 type voltage.
+   - VDD: DC value 12.
+   - V1 : right-click > Advanced > choose SINE > DC offset 0,
+          Amplitude 0.1, Freq 1k > OK.
+   - V2 : same but Amplitude 0.001.
+10. Tail current source: F2, type current, select "current", OK, drop
+    below the two transistors. Right-click > DC value 30m (not 30M).
+    Rename ISS1. Check arrow direction: the arrow must point DOWN,
+    pulling current from the joined sources to ground (Ctrl+R to
+    rotate if it points up).
+11. Grounds (G): below ISS1, below V1, below V2, below VDD.
+12. Wires (F3):
+    VDD(+) to the top of RD and RD2 (draw a bar joining them);
+    bottom of RD to M1 drain; bottom of RD2 to M2 drain;
+    M1 source and M2 source joined together and to the top of ISS1;
+    bottom of ISS1 to ground;
+    M1 gate to V1(+); V1(-) to ground;
+    M2 gate to V2(+); V2(-) to ground; VDD(-) to ground.
+13. Labels (F4): VO1 on the M1 drain wire; VO2 on the M2 drain wire.
+14. Directives:
+    S > type   .lib AP9465GEM.lib   > OK > place.
+    Simulate > Edit Simulation Cmd > tab Transient:
+       Stop time: 10m  (reads .tran 10ms) > OK > place.
+
+15. DC CHECK: temporarily replace .tran with .op, Run. Expected from
+    your journal: VO1 = VO2 = about 10.5 V and the tail node about
+    -1.68 V. Restore .tran 10ms afterwards.
+
+
+--------------------------------------------------------------
+PART 3 : RUN CIRCUIT A AND MEASURE GAINS
+--------------------------------------------------------------
+16. Click Run. Plot window opens.
+17. Click the nets VO1 and VO2 with the probe. Two sine waves show.
+18. Plot the difference: right-click the plot > Add Traces (or Plot
+    Settings > Add Trace). In "Expression(s) to add" type
+        V(vo1)-V(vo2)
+    OK.
+19. Measure amplitude: left-click a trace name to get a cursor box;
+    drag to a peak and read the voltage.
+
+CLEAN GAIN MEASUREMENTS (do these as three short runs)
+ Run 1  DIFFERENTIAL MODE: set V1 = SINE(0 0.05 1k) and
+        V2 = SINE(0 0.05 1k 0 0 180)  (the last number is a 180
+        degree phase). Input difference = 0.1 V peak.
+        Ad = amplitude of [V(vo1)-V(vo2)] / 0.1
+ Run 2  COMMON MODE: set V1 = SINE(0 0.1 1k) and V2 = SINE(0 0.1 1k)
+        Acm = amplitude of V(vo1) / 0.1
+ Then   CMRR (dB) = 20 * log10( Ad / Acm )
+
+To edit a source's waveform: right-click the source > Advanced.
+
+
+--------------------------------------------------------------
+PART 4 : CIRCUIT B (ACTIVE LOAD)
+--------------------------------------------------------------
+20. Same schematic or File > New Schematic (save as diffamp_b.asc
+    in the same folder). Place:
+    - M4 (left) and M3 (right): nmos with model AP9465GEM
+    - M5 (left) and M6 (right): pmos with model FDS4559_P
+    - VDD1 = 12 V, V3 = SINE(0 0.001 1k), V4 = SINE(0 0.01 1k)
+    - ISS2: current source 30m pointing down.
+21. Wires:
+    VDD1(+) to the sources of M5 and M6 (join them with a bar);
+    M5 gate to M5 drain (diode connection) and M6 gate to M6 drain;
+    M5 drain to M4 drain; M6 drain to M3 drain;
+    M4 and M3 sources joined together to the top of ISS2;
+    bottom of ISS2 to ground;
+    M4 gate to V3(+); M3 gate to V4(+); V3(-) and V4(-) to ground.
+22. Labels: VO3 on the M5/M4 junction, VO4 on the M6/M3 junction.
+23. Directives: .lib AP9465GEM.lib and .lib FDS4559.lib (S key, two
+    separate lines), and .tran 10ms.
+24. .op check: VO3 and VO4 about 9.53 V, tail about -1.68 V.
+25. Run .tran, plot VO3, VO4 and V(vo3)-V(vo4), measure Ad, Acm,
+    CMRR in the same way as steps 19.
+
+
+--------------------------------------------------------------
+PART 5 : TEST THE VARIOUS LOADS (THE REAL AIM)
+--------------------------------------------------------------
+Use Circuit A. Put the load between the output VO1 and ground. Add
+ONE load at a time, run .tran, take a screenshot, then delete (F5)
+that load before adding the next.
+
+ a) RESISTIVE LOAD
+    F2 > res > value 1k (then repeat with 100).
+    Wire: VO1 wire to the resistor top, resistor bottom to ground.
+ b) CAPACITIVE LOAD
+    F2 > cap > value 100n (then 1u).
+    Same wiring as above.
+ c) INDUCTIVE LOAD
+    F2 > ind > value 1m (then 10m). Same wiring.
+ d) COMPLEX (RLC) LOAD
+    Place a resistor 100, an inductor 1m, and a capacitor 100n in
+    series from VO1 to ground.
+
+For each run note:
+   - peak voltage of VO1
+   - whether the sine is shifted, distorted, or rings
+   - whether spikes (inductive) appear on fast changes
+
+
+--------------------------------------------------------------
+PART 6 : WRITE THIS IN YOUR JOURNAL
+--------------------------------------------------------------
+Results table
+  Circuit        Ad        Acm       CMRR (dB)
+  A (resistor)   ____      ____      ____
+  B (active)     ____      ____      ____
+
+Load table
+  Load type     Value tried   Observed effect
+  Resistive     ____          ____
+  Capacitive    ____          ____
+  Inductive     ____          ____
+  RLC           ____          ____
+
+Conclusion (use your results)
+  "The differential amplifier amplifies the difference of V1 and V2
+  and rejects the common signal; the measured CMRR was ___ dB.
+  Resistive loads change output amplitude and power, capacitive loads
+  add phase lag and may cause ringing, inductive loads cause voltage
+  spikes, and RLC loads give frequency-dependent behaviour."
+
+
+--------------------------------------------------------------
+IF SOMETHING GOES WRONG
+--------------------------------------------------------------
+Outputs stuck at 12 V or near 0 V: tail current arrow is upside down,
+   or model polarity (NMOS/PMOS) is wrong.
+Error "unknown model": the Value does not match the name in the .lib.
+"30M" typed instead of "30m": in SPICE, M = milli, so both work, but
+   "30meg" would be mega. Use 30m.
+No output change with the load: you connected the load wire to the
+   wrong node. Check it touches the VO1 wire.

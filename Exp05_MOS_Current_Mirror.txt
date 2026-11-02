@@ -1,0 +1,176 @@
+==============================================================
+EXPERIMENT 5 : MOS BASED CURRENT MIRROR CIRCUIT
+Complete start-to-finish guide  (tool: LTspice)
+==============================================================
+
+WHY LTSPICE AND NOT MICROWIND
+Your journal shows this experiment in LTspice (AP9465GEM transistors,
+.op and .dc VM 0 30). Microwind cannot run this vendor-model DC sweep.
+
+AIM
+To build a MOSFET current mirror (your journal draws the cascode
+version with four transistors), find how closely the output current
+copies the reference current, and see how the output current varies
+with output voltage.
+
+FINAL CIRCUIT
+  VDD = 30 V, Rref = 100 ohm
+  M0 and M1 form the reference branch, M3 and M2 the output branch
+  all four transistors = AP9465GEM
+  VM = output supply, swept 0 to 30 V
+  Directives: .op   then   .dc VM 0 30
+  Journal result: Iref = 262.0236 mA, Iout = 262.60185 mA
+
+
+--------------------------------------------------------------
+PART 1 : GET SOFTWARE AND MODEL
+--------------------------------------------------------------
+1. LTspice: analog.com > search "LTspice" > Download for Windows >
+   install defaults. (Lab PC already has it.)
+2. Make folder C:\ADCMOS\Exp5
+3. AP9465GEM.lib: search "AP9465GEM SPICE model" (APEC,
+   a-poweric.com) or ask your lab teacher. Save it in C:\ADCMOS\Exp5.
+4. Open it in Notepad, find the first .MODEL or .SUBCKT line, write
+   down the name and whether it is NMOS or PMOS. Use the matching
+   LTspice symbol (nmos or pmos).
+   No model file? Use  .model NMOD NMOS(Kp=0.2 Vto=1.5 Lambda=0.02)
+   and set all four Values to NMOD (results will differ).
+
+
+--------------------------------------------------------------
+PART 2 : NEW SCHEMATIC AND PLACE PARTS
+--------------------------------------------------------------
+5. Open LTspice. File > New Schematic. File > Save As >
+   C:\ADCMOS\Exp5\current_mirror.asc.
+Keys: F2 component, F3 wire, F4 net label, G ground, S directive,
+Ctrl+R rotate, Ctrl+E mirror, F5 delete, F7 move, Esc stop.
+
+6. TRANSISTORS
+   F2, type nmos (or pmos per the model), OK. Drop four, arranged:
+      M0 (left, upper)    M3 (right, upper)
+      M1 (left, lower)    M2 (right, lower)
+   For each: right-click > pick your model in the "Pick New MOSFET"
+   list; if it is not there, Cancel, then Ctrl+right-click the
+   transistor and type the model name in Value. Rename M0..M3.
+7. RESISTOR Rref: F2, type res, drop at top-left, Ctrl+R vertical.
+   Right-click > Resistance 100.
+8. VOLTAGE SOURCES: F2, type voltage.
+   - VDD : DC value 30   (top-left)
+   - VM  : DC value 35   (top-right; the sweep will override this)
+   Right-click the name text to rename them VDD and VM.
+9. GROUNDS: G, click below VDD, below VM, and one at the bottom
+   joining point of M1 and M2 sources.
+
+
+--------------------------------------------------------------
+PART 3 : WIRING (follow carefully)
+--------------------------------------------------------------
+10. Press F3 and make these connections:
+    LEFT (reference) BRANCH
+      a. VDD(+) -> top of Rref; VDD(-) -> ground
+      b. bottom of Rref -> M0 DRAIN. Label this node VA (see step 12)
+      c. M0 GATE tied to M0 DRAIN (diode connection)
+      d. M0 SOURCE -> M1 DRAIN. Label this node VX
+      e. M1 GATE tied to M1 DRAIN (diode connection; same node VX)
+      f. M1 SOURCE -> ground
+    RIGHT (output) BRANCH
+      g. VM(+) -> M3 DRAIN. Label this node VB; VM(-) -> ground
+      h. M3 GATE -> M0 GATE (this joins the right upper gate to the
+         left upper gate / VA)
+      i. M3 SOURCE -> M2 DRAIN. Label this node VY
+      j. M2 GATE -> M1 GATE (joins right lower gate to left lower
+         gate / VX)
+      k. M2 SOURCE -> ground
+11. Check: sources of M1 and M2 both go to ground; M0 and M3 gates
+    share one node; M1 and M2 gates share another node.
+12. NET LABELS: F4, type VA, OK, click on the node; repeat for VB,
+    VX, VY.
+
+
+--------------------------------------------------------------
+PART 4 : MODEL LINE AND OPERATING POINT
+--------------------------------------------------------------
+13. Press S, type   .lib AP9465GEM.lib   , OK, place on empty space.
+    (Built-in model users: type the .model line instead.)
+14. Press S, type   .op   , OK, place it.
+15. Click Run. A window shows the DC node voltages and currents.
+    If not, press Ctrl+L (or View > SPICE Output Log) to see them.
+16. Find:
+    - Iref = current in Rref (look for I(Rref))
+    - Iout = current in M3 drain (look for Id(M3))
+    - the node voltages VA, VB, VX, VY
+    Your journal values: Iref = 262.0236 mA, Iout = 262.60185 mA,
+    VB = 35 V, VY = 1.961 V.
+17. CALCULATE the error:
+      error % = (Iout - Iref) / Iref x 100
+    Example from the journal: (262.60185 - 262.0236)/262.0236 =
+    about 0.22 %.
+
+
+--------------------------------------------------------------
+PART 5 : DC SWEEP (HOW IOUT CHANGES WITH OUTPUT VOLTAGE)
+--------------------------------------------------------------
+18. Delete the .op line (F5, click it) or right-click it and edit.
+19. Simulate > Edit Simulation Cmd > tab "DC sweep":
+      Source: 1st source  -> Name of 1st source to sweep: VM
+      Type of sweep: Linear
+      Start value: 0
+      Stop value: 30
+      Increment: 0.1
+    OK, place. Reads  .dc VM 0 30
+20. Click Run. Plot opens empty.
+21. In the plot window: menu Plot Settings > Add Trace. In the box
+    type  Id(M3)  and click OK.
+    (Or move the pointer over the M3 drain pin until a current
+    probe icon appears and click.)
+22. Read the curve: Iout rises at low VM, then flattens. The flat
+    part is where M3 and M2 are in saturation and the mirror works.
+23. MEASURE OUTPUT RESISTANCE
+    a. Left-click the trace name Id(M3) at the top; cursor box
+       appears (X = VM, Y = current).
+    b. Put the cursor at VM = 15 V, note current I1.
+    c. Move to VM = 30 V, note current I2.
+    d. Rout = (30 - 15) / (I2 - I1)  (in ohm).
+    A cascode mirror gives a much higher Rout than a plain 2-transistor
+    mirror.
+24. SAVE PICTURES: Windows key + Shift + S, snip the plot and the
+    schematic for the journal.
+
+OPTIONAL COMPARISON (plain mirror)
+25. Save a copy as simple_mirror.asc. Delete M0 and M3 and rewire:
+    Rref bottom -> M1 drain (diode); M1 gate -> M2 gate;
+    VM -> M2 drain. Run .dc VM 0 30 and plot Id(M2). The curve
+    will slope more steeply (lower output resistance).
+
+
+--------------------------------------------------------------
+PART 6 : WRITE THIS IN YOUR JOURNAL
+--------------------------------------------------------------
+Table
+  Iref                 = ______ mA
+  Iout                 = ______ mA
+  Mirror error         = ______ %
+  Output resistance    = ______ ohm (from the .dc sweep)
+
+Formula
+  Iout = Iref x (W/L)out / (W/L)ref   (equals Iref when transistors
+  are identical)
+
+Conclusion
+  "The current mirror copied the reference current of ___ mA to
+  ___ mA with ___ % error. The output current stays nearly constant
+  once the output transistor is in saturation, so the circuit acts as
+  a current-controlled current source."
+
+
+--------------------------------------------------------------
+IF SOMETHING GOES WRONG
+--------------------------------------------------------------
+Currents are zero: transistors are off; check polarity of the model
+   or that gates are tied to drains as in step 10.
+Iout much different from Iref: M3 gate is not joined to M0 gate, or
+   M2 gate not joined to M1 gate.
+Id(M3) not found: type exactly Id(M3) with capital I and d; the name
+   must match what you renamed the transistor to.
+Error "singular matrix" or "no DC path": a node is floating; check
+   that every ground symbol touches a wire.

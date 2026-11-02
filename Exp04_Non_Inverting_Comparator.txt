@@ -1,0 +1,157 @@
+==============================================================
+EXPERIMENT 4 : NON-INVERTING COMPARATOR
+Complete start-to-finish guide  (tool: LTspice)
+==============================================================
+
+WHY LTSPICE AND NOT MICROWIND
+Your journal shows this experiment as an LTspice transient
+simulation (.tran 10ms, sine input, square-wave output). Microwind
+is a layout tool and does not run this kind of analog schematic.
+
+AIM
+To build a comparator whose output goes high when the sine input
+is above a reference voltage and low when it is below, and see the
+square-wave output.
+
+TWO WAYS TO DO IT (do Method A first, it is the quickest and always
+works; Method B is the transistor-level circuit drawn in your
+journal)
+
+
+==============================================================
+METHOD A : OP-AMP COMPARATOR
+==============================================================
+
+PART 1 : SOFTWARE
+1. LTspice (free): analog.com > search "LTspice" > Download for
+   Windows > install with defaults. (Lab PC has it.)
+2. Make folder C:\ADCMOS\Exp4
+
+PART 2 : DRAW
+3. Open LTspice. File > New Schematic. File > Save As >
+   C:\ADCMOS\Exp4\comparator_a.asc.
+   Keys: F2 component, F3 wire, F4 net label, G ground, S directive,
+   Ctrl+R rotate, F5 delete, F7 move, Esc stop.
+4. OP-AMP: F2. In the symbol list open the folder named
+   "Opamps" (or type UniversalOpAmp2 in the search box). Select
+   UniversalOpAmp2, OK, drop it in the middle. It has five pins:
+   + input, - input, V+ (top), V- (bottom), output.
+5. Voltage sources (F2, type voltage), drop four:
+   - Vin   : right-click > Advanced > SINE > DC offset 0,
+             Amplitude 1, Freq 1k > OK.   (the signal)
+   - Vref  : DC value 0.3.                (the reference)
+   - Vpos  : DC value 12.                 (positive supply)
+   - Vneg  : DC value 12 - and wire it with its + at ground and its
+             - terminal to the op-amp V- pin, so that rail is -12 V.
+6. Grounds: G, click below Vin, Vref, Vpos(-), and at the + of Vneg.
+7. Wires (F3):
+   Vin(+) to op-amp + input; Vin(-) to ground;
+   Vref(+) to op-amp - input; Vref(-) to ground;
+   Vpos(+) to op-amp V+ pin; Vpos(-) to ground;
+   Vneg(+) to ground; Vneg(-) to op-amp V- pin.
+8. Labels (F4): "vin" on the input wire, "vo" on the output pin.
+
+PART 3 : ANALYSIS AND RUN
+9. Simulate > Edit Simulation Cmd > tab Transient > Stop time 5m >
+   OK > place. Reads  .tran 5m
+10. Click Run.
+11. Click the net "vin" and the net "vo" with the probe. Top: the
+    sine. Add a pane for the output if you want: right-click plot >
+    Add Plot Pane, then click the "vo" net again.
+12. To see the reference line, click the wire that goes from Vref(+)
+    to the op-amp - input. A horizontal line at 0.3 V appears on the
+    plot next to the sine.
+13. Check: every time the sine crosses 0.3 V going up, the output
+    snaps to about +11 V; when it crosses going down it snaps to
+    about -11 V. The output is in phase with the input
+    (non-inverting).
+14. Use the cursor (click trace name) at a crossing to note the time
+    and input voltage; they should be near 0.3 V.
+
+
+==============================================================
+METHOD B : TRANSISTOR-LEVEL CIRCUIT FROM YOUR JOURNAL
+==============================================================
+
+PART 1 : MODELS
+15. Folder C:\ADCMOS\Exp4. Your journal figure labels the devices
+    simply NMOS and PMOS, so use LTspice's built-in symbols and add
+    these two directive lines (S key, one at a time):
+      .model NMOS NMOS(Kp=2m Vto=1 Lambda=0.02)
+      .model PMOS PMOS(Kp=1m Vto=-1 Lambda=0.02)
+    Each transistor's Value box must read NMOS or PMOS.
+
+PART 2 : PLACE
+16. New schematic, save comparator_b.asc.
+17. F2, type nmos : place 4 times (M1, M2, M3, M4).
+    F2, type pmos : place 3 times (M5, M6, M7).
+    Right-click > (or Ctrl+right-click) set Value to NMOS / PMOS.
+18. Voltage sources (F2 voltage): VDD = 12; VSS = 12 (wired with its
+    - end on the bottom rail so the rail is -12 V); Vin1 = SINE(0 1
+    1k); Vin2 = 0.3; Vb1 = 1; Vb2 = 1.
+19. F2 cap: CL = 1u. F2 res: RL = 1000k (type 1000k).
+
+PART 3 : WIRE (follow your journal figure)
+20. Top rail VDD(+): connect to the sources of M5, M6, M7.
+    M5 gate to M5 drain, and M5 gate to M7 gate.
+    M5 drain to M4 drain.   M7 drain to M3 drain.
+    M7 drain also to M6 gate.
+    M4 gate to Vin2(+); M3 gate to Vin1(+). Vin1(-) and Vin2(-)
+    to ground.
+    M4 source and M3 source joined together to M1 drain.
+    M1 gate to Vb1(+); Vb1(-) to the bottom rail; M1 source to the
+    bottom rail.
+    M6 drain to M2 drain (this is the output node).
+    M2 gate to Vb2(+); Vb2(-) to the bottom rail; M2 source to the
+    bottom rail.
+    Bottom rail to VSS(-); VSS(+) to ground. VDD(-) to ground.
+    Output node to the top of CL; bottom of CL to the top of RL;
+    bottom of RL to ground. Label the CL/RL junction  VO  (F4).
+21. Directive: Simulate > Edit Simulation Cmd > Transient > Stop time
+    10m.  Reads  .tran 10ms.
+22. Run. Click nets: Vin1 input, Vin2, and VO.
+23. Expected (journal): a rectangular wave of about 24 V
+    peak-to-peak at 1 kHz that switches whenever the sine crosses the
+    0.3 V line. The level may sit around +-12 V or 0 to 24 V
+    depending on the coupling capacitor; both are fine as long as
+    it is a clean square wave in phase with the input.
+24. If the output does not switch: raise Kp (e.g. 20m) or adjust
+    Vb1/Vb2 between 0.8 and 1.5 V. The simplified models differ from
+    the lab's, so bias values may need small changes.
+
+
+--------------------------------------------------------------
+OPTIONAL EXTRA : HYSTERESIS (SCHMITT TRIGGER) with Method A
+--------------------------------------------------------------
+25. Delete Vref. Connect a resistor R1 = 10k from the output vo to
+    the op-amp + input, and R2 = 1k from the + input to the Vin(+)
+    node. Run again and note that the output now flips at two
+    different input levels. This is what the journal means by
+    adding positive feedback to improve noise immunity.
+
+
+--------------------------------------------------------------
+WRITE THIS IN YOUR JOURNAL
+--------------------------------------------------------------
+Table
+  Condition         Output Vo
+  Vin > Vref        +Vsat (positive saturation)   measured ____ V
+  Vin < Vref        -Vsat (negative saturation)   measured ____ V
+Screenshots: schematic, input sine with reference line, output
+square wave.
+Conclusion
+  "The comparator has no feedback, so the output saturates to the
+  positive rail when Vin exceeds Vref and to the negative rail when
+  it is below. Output was ___ V peak-to-peak with the same phase as
+  the input. With a sine input and zero reference it works as a
+  zero-crossing detector."
+
+
+--------------------------------------------------------------
+IF SOMETHING GOES WRONG
+--------------------------------------------------------------
+Output flat: supply sources wired wrong. The V- pin must be at -12 V.
+Output inverted: you swapped Vin and Vref at the op-amp inputs.
+"Unknown subcircuit UniversalOpAmp2": pick the symbol from the
+   Opamps folder rather than typing the name by hand.
+Method B stuck at one level: see step 24.

@@ -1,0 +1,197 @@
+==============================================================
+EXPERIMENT 10 : STICK DIAGRAM AND CMOS XOR GATE
+Complete start-to-finish guide  (tool: pencil/paper + Microwind)
+==============================================================
+
+NOTE ON MENU NAMES
+Microwind menus and icon names differ a little between versions
+(your journal shows 3.9). If an item is not exactly where this guide
+says, look in the neighbouring menu or hover over the palette icons.
+
+AIM
+To understand stick diagrams and to design a CMOS XOR gate, draw its
+stick diagram, and build and simulate its layout in Microwind.
+
+THEORY YOU NEED (short)
+  A stick diagram is a simplified layout. It shows which transistors
+  connect to which, using coloured lines, without exact sizes.
+  Colour code (same as Microwind):
+     n-diffusion = green   (NMOS source/drain)
+     p-diffusion = yellow  (PMOS source/drain)
+     polysilicon = red     (gates)
+     metal 1     = blue    (wires, VDD, GND)
+     contact     = black square
+  Rules:
+     - Poly crossing diffusion forms a transistor.
+     - NMOS sits on the p-substrate; PMOS sits in an n-well.
+     - PMOS is drawn near the VDD rail, NMOS near the GND rail.
+
+  XOR truth table      A B | A xor B
+                       0 0 |   0
+                       0 1 |   1
+                       1 0 |   1
+                       1 1 |   0
+
+  CMOS XOR (needs A, B and their complements A', B'):
+     Pull-up   (4 PMOS): (A' parallel B') in series with (A parallel B)
+     Pull-down (4 NMOS): (A series B) in parallel with (A' series B')
+     Plus 2 inverters (4 transistors) to make A' and B'.
+     Total = 12 transistors. (If A' and B' are given as inputs, 8.)
+
+
+--------------------------------------------------------------
+PART 1 : DRAW THE STICK DIAGRAM ON PAPER
+--------------------------------------------------------------
+Use graph paper and 5 coloured pens/pencils (blue, red, green, yellow,
+black).
+
+1. Draw a long horizontal BLUE line near the top: label VDD.
+   Draw another long horizontal BLUE line near the bottom: label GND.
+2. In the upper-middle draw a horizontal YELLOW strip for the PMOS
+   diffusion. In the lower-middle draw a horizontal GREEN strip for
+   the NMOS diffusion.
+3. Draw RED vertical lines crossing both strips, one per input signal
+   in this left-to-right order:  A', B', A, B. Label each at the top.
+   Each crossing is a transistor. Number them M1..M8.
+4. Connect with blue metal lines:
+   - PMOS: the parallel pairs share top connections to VDD (A' with
+     B' as one pair, A with B as another pair, the two pairs in series
+     through a middle node N1). The bottom of the second pair goes to
+     the output node Y.
+   - NMOS: A in series with B from Y to GND; A' in series with B' from
+     Y to GND; the two chains are in parallel.
+5. Place black squares (contacts) wherever metal meets diffusion or
+   poly.
+6. Draw the two small inverters (poly gate crossing a yellow and a
+   green strip, drains joined, sources to VDD and GND) to generate
+   A' and B'.
+7. Add a legend (colours) and label VDD, GND, A, B, Y.
+
+
+--------------------------------------------------------------
+PART 2 : SET UP MICROWIND
+--------------------------------------------------------------
+8. Lab PC: start MICROWIND. Own laptop: microwind.net > Downloads >
+   MICROWIND student version > install defaults > start it.
+9. Make folder C:\ADCMOS\Exp10
+10. File > Select Foundry > choose the lab's rule file (your journal
+    inverter used L = 0.03 um) > Open. File > New.
+11. File > Save As > C:\ADCMOS\Exp10 > xor.MSK > Save.
+
+
+--------------------------------------------------------------
+PART 3 : SINGLE INVERTER LAYOUT (needed for A' and B')
+--------------------------------------------------------------
+12. MOS generator icon (right palette) > n-MOS > Width 0.08 um >
+    Length 0.03 um > Number of gates 1 > Generate device > click in the
+    drawing area to drop it.
+13. MOS generator > p-MOS > Width 0.108 um > Length 0.03 um > Number of
+    gates 1 > Generate device > drop it directly above the NMOS, poly
+    lines aligned.
+14. Poly icon (red): draw a vertical strip joining the two gates. Put a
+    poly contact on it and a blue stub to the left: this is the input.
+15. Metal 1 icon (blue): draw a rail above (VDD) and below (VSS).
+    Draw vertical strips: PMOS left contact to VDD; NMOS left contact
+    to VSS; PMOS right contact to NMOS right contact (output).
+    This matches the inverter layout in your journal.
+16. Select the inverter (Edit > Select, drag a box). Edit > Copy,
+    Edit > Paste: place a second copy on the left side. One inverter
+    for A, one for B. Leave their outputs unconnected for now and
+    label them Abar and Bbar later.
+
+
+--------------------------------------------------------------
+PART 4 : XOR CORE (4 PMOS + 4 NMOS)
+--------------------------------------------------------------
+17. NMOS devices
+    Generate 4 NMOS (MOS generator > n-MOS, W 0.16 um, L 0.03 um, 1
+    gate each) in a row, using one diffusion strip when possible so
+    neighbouring devices share nodes:
+      - M9  gate A   and M11 gate B   in series: from node Y to GND.
+      - M10 gate Abar and M12 gate Bbar in series: from node Y to
+        GND.
+18. PMOS devices
+    Generate 4 PMOS (n-well is drawn automatically), W 0.216 um,
+    L 0.03 um:
+      - M5 (gate Abar) and M6 (gate Bbar) in parallel: sources to
+        VDD, drains to node N1.
+      - M7 (gate A) and M8 (gate B) in parallel: sources to N1,
+        drains to node Y.
+19. GATE WIRING
+    Use red poly strips. Run input A to the gates of M7 and M9;
+    input B to M8 and M11; Abar (output of inverter A) to M5 and M10;
+    Bbar (output of inverter B) to M6 and M12. Cross poly lines
+    only with Metal 1 over them, never poly over poly.
+20. DIFFUSION WIRING
+    Use blue Metal 1 strips and place a contact (palette icon:
+    contact diffusion/metal) at each diffusion connection. Connect
+    all nodes exactly as in your stick diagram.
+21. Output: a stub from node Y at the right edge.
+22. PROPERTIES
+    Vdd icon on the VDD rail; Vss icon on the VSS rail; Clock icon on
+    A (period 200 ps) and on B (period 400 ps); Visible node icon on
+    Y (and on Abar, Bbar if you want).
+
+
+--------------------------------------------------------------
+PART 5 : CHECK AND SIMULATE
+--------------------------------------------------------------
+23. Analysis > Design Rule Checker > run. Correct every error.
+24. Simulate > Run Simulation. Tab "Voltage vs time". Click Run;
+    set Time Scale so at least 800 ps fits; More to extend.
+25. Check: Y is HIGH only when A and B are different:
+      A=0,B=0 -> Y=0   A=0,B=1 -> Y=1   A=1,B=0 -> Y=1   A=1,B=1 -> Y=0
+26. Screenshot the layout (Windows key + Shift + S) and the waveforms.
+    Photograph/scan your hand-drawn stick diagram for comparison.
+
+
+--------------------------------------------------------------
+PART 6 : QUICK ALTERNATIVE (AUTOMATIC LAYOUT)
+--------------------------------------------------------------
+27. Notepad: type
+        module xor2(input A, input B, output Y);
+          assign Y = A ^ B;
+        endmodule
+    File > Save As > C:\ADCMOS\Exp10\xor2.v > Save as type All Files.
+28. Microwind: File > New > Compile > Compile Verilog File > xor2.v >
+    Open. Add clocks on A and B, a Visible node on Y, run DRC and
+    simulate as in steps 23 to 25. Compare this layout with your
+    hand-made one.
+
+
+--------------------------------------------------------------
+PART 7 : WRITE THIS IN YOUR JOURNAL
+--------------------------------------------------------------
+Include:
+  - XOR truth table
+  - Colour code table (layer, colour, use)
+  - Hand-drawn stick diagram with legend
+  - Layout screenshot from Microwind
+  - Waveform screenshot with Y high only when A differs from B
+
+Design rules (as in your journal, corrected)
+  - Poly crossing diffusion forms a MOS transistor.
+  - NMOS is on the p-substrate (or p-well); PMOS is in an n-well.
+  - PMOS near the VDD rail, NMOS near the GND rail.
+  - Inverters, NAND, NOR and XOR can all be drawn using this
+    convention.
+
+Conclusion
+  "A stick diagram shows transistor placement and connections using
+  colour-coded layers. The CMOS XOR gate was designed with a 4-PMOS
+  pull-up and 4-NMOS pull-down network plus inverters for the
+  complemented inputs, and the Microwind simulation confirmed the XOR
+  truth table."
+
+
+--------------------------------------------------------------
+IF SOMETHING GOES WRONG
+--------------------------------------------------------------
+Y never goes high: pull-up chain not connected through node N1, or a
+   missing contact between metal and diffusion.
+Y stuck at VDD or GND: Abar and Bbar not connected to the inverter
+   outputs.
+Extra transistor appears: two poly lines crossed over diffusion by
+   accident. Move them off the diffusion.
+Layout too tight for DRC: spread devices apart by a few lambda and
+   reroute metal.
