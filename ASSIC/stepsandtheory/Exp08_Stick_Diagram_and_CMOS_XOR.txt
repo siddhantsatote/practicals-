@@ -1,0 +1,21 @@
+================================================================================
+EXPERIMENT 8: Stick Diagram and CMOS XOR Gate Layout
+================================================================================
+
+AIM:
+To draw the color-coded stick diagram and implement the compact mask layout of a 
+2-input CMOS XOR gate in Microwind using Euler path optimization.
+
+STICK DIAGRAM RULES:
+- Green : N+ Diffusion (NMOS)
+- Brown/Orange : P+ Diffusion (PMOS)
+- Red   : Polysilicon (Transistor Gates)
+- Blue  : Metal 1 (Interconnects, VDD rail, VSS rail)
+- Black crosses : Contact cuts (CO)
+
+EULER PATH METHOD:
+- Find an uninterrupted path traversing every transistor gate in the PMOS pull-up graph 
+  and NMOS pull-down graph in the identical sequence.
+- Enables single continuous diffusion strips for PMOS and NMOS without diffusion breaks, 
+  minimizing source/drain parasitic capacitances and layout area.
+================================================================================

@@ -1,0 +1,41 @@
+================================================================================
+EXPERIMENT 1: Design, Synthesis, and Analysis of 4-bit Ripple Carry Adder (ASIC Flow)
+================================================================================
+
+AIM:
+To design a 4-bit Ripple Carry Adder (RCA) using Verilog and VHDL, perform functional 
+simulation, ASIC-oriented synthesis, and analyze area, power, and timing, identifying 
+the critical path and delay.
+
+APPARATUS / TOOLS REQUIRED:
+- Cadence Genus / Synopsys Design Compiler / OpenLane / Xilinx ISE
+- DSCH 3.5 & Microwind 3.5 (Schematic and Mask Layout)
+- Verilog Simulator (ModelSim / ISim / Icarus Verilog)
+
+THEORY:
+A Ripple Carry Adder consists of cascaded Full Adders. Each full adder computes:
+  Sum  = A ^ B ^ Cin
+  Cout = (A & B) | (B & Cin) | (A & Cin)
+
+The carry output of each stage ripples to the next, making the total delay proportional 
+to the bit-width N:
+  Worst-case delay = N * t_carry
+
+Why RCA is important in ASIC design:
+- Simple structure & low cell area
+- Predictable regular routing
+- Baseline reference for high-speed adder architectures (Carry Lookahead, Carry Select)
+
+SYNTHESIS STEPS (ASIC FLOW):
+1. Read HDL source files (FULL_ADDER.v, ripple_carry_adder_4bit.v).
+2. Set target standard cell library (e.g., 45nm / 28nm standard cells).
+3. Apply timing and design constraints (clock frequency, input/output arrival times, load capacitance).
+4. Run logic synthesis and technology mapping (Genus: 'syn_generic', 'syn_map', 'syn_opt').
+5. Generate reports: Area report, Timing report (critical path), Power report.
+6. Export synthesized Gate-level Netlist (.v) and SDC constraints for Place & Route (P&R).
+
+OBSERVATIONS & CRITICAL PATH:
+- Critical Path: From A[0]/B[0]/Cin through FA0 carry -> FA1 carry -> FA2 carry -> FA3 sum/cout.
+- Area: Minimal (4 Full Adders, 8 LUTs / 36 equivalent gates).
+- Timing: Linear propagation delay O(N).
+================================================================================

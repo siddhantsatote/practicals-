@@ -1,0 +1,21 @@
+================================================================================
+EXPERIMENT 7: 2:1 Multiplexer and Transmission Gate Design
+================================================================================
+
+AIM:
+To design and simulate a CMOS Transmission Gate (TG) and TG-based 2:1 Multiplexer 
+in DSCH and Microwind, analyzing ON-resistance and switching performance.
+
+TRANSMISSION GATE PRINCIPLE:
+- Parallel combination of 1 NMOS and 1 PMOS transistor.
+- Controlled by complementary control signals: S (gate of NMOS) and ~S (gate of PMOS).
+- Pass characteristics:
+  * NMOS passes a strong logic '0' (0V) and degraded logic '1' (VDD - Vtn).
+  * PMOS passes a strong logic '1' (VDD) and degraded logic '0' (|Vtp|).
+  * In parallel, the TG passes full-rail rail-to-rail signals (0V to VDD) without threshold drop.
+
+2:1 MUX USING TRANSMISSION GATES:
+- 2 Transmission Gates + 1 CMOS Inverter = 6 transistors total.
+- Compared to conventional gate-level MUX (2 AND + 1 OR + 1 NOT = 12 transistors), 
+  the TG implementation saves 50% silicon area and dynamic switching power.
+================================================================================

@@ -1,0 +1,21 @@
+================================================================================
+EXPERIMENT 5: CMOS Standard Cells - Inverter, NAND, and NOR Gates
+================================================================================
+
+AIM:
+To design the schematic in DSCH and mask layout in Microwind for CMOS Inverter, 
+2-input NAND, and 2-input NOR gates, and perform DC transfer and transient analysis.
+
+DESIGN RULES (CMOS 0.12um / 45nm):
+- Inverter: 1 PMOS (W/L = 2.0/0.12um) + 1 NMOS (W/L = 1.0/0.12um)
+- 2-input NAND: PMOS in parallel (pull-up network) + NMOS in series (pull-down network)
+- 2-input NOR: PMOS in series (pull-up network) + NMOS in parallel (pull-down network)
+- Well Polarization: N-well tied to VDD via N+ tap (DN) + contact (CO) + Metal 1 (ME).
+- Substrate Polarization: P-substrate tied to VSS via P+ tap (DP) + contact (CO) + Metal 1 (ME).
+
+PARAMETERS EXTRACTED:
+- Threshold voltages Vtn, Vtp
+- Switching threshold Vm (midpoint voltage where Vin = Vout)
+- Noise Margins: NMH = VOH - VIH, NML = VIL - VOL
+- Propagation Delays: t_PHL (High-to-Low) and t_PLH (Low-to-High)
+================================================================================

@@ -1,0 +1,27 @@
+================================================================================
+EXPERIMENT 4: Design, Synthesis and Simulation of 4-bit Asynchronous Up/Down Counter
+================================================================================
+
+AIM:
+Design, simulate and synthesize a 4-bit asynchronous (ripple) up/down counter with 
+enable and asynchronous reset. Verify functional behaviour for up and down counting, 
+observe ripple propagation (timing), and discuss synthesis limitations and advantages.
+
+THEORY:
+1. Asynchronous (Ripple) Counter:
+   - Only the LSB flip-flop is clocked by the external master clock signal.
+   - Each subsequent higher-order bit is clocked by the output (Q or ~Q) of the preceding stage.
+   - Up Counting: Next stage clocked on falling edge of Q (or rising edge of ~Q).
+   - Down Counting: Next stage clocked on rising edge of Q (or falling edge of ~Q).
+2. Signals:
+   - clk       : Master input clock (drives bit 0).
+   - reset     : Asynchronous master reset (clears counter to 4'b0000).
+   - up_down   : Direction control (1 = Count UP, 0 = Count DOWN).
+   - count[3:0]: 4-bit register holding current count value (0 to 15).
+
+ADVANTAGES & LIMITATIONS IN ASIC DESIGN:
+- Advantage: Extremely low hardware overhead, no complex next-state decoding logic.
+- Limitation: Cumulative ripple delay (t_delay = 4 * t_pd_FF), causing intermediate glitches 
+  during state transitions. In modern synchronous ASIC flows, synchronous counters with global 
+  clock distribution are preferred for STA (Static Timing Analysis) closure.
+================================================================================

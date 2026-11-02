@@ -1,0 +1,49 @@
+VERSION 02-11-2026 18:33:17
+FIG #C:\Users\admin\Desktop\praticals\ADCMOS\ADCMOS_Exam_Files\Microwind_msk\Exp02_Cascode_Amplifier\Exp02_cascode_amplifier_layout.MSK
+BB(10,8,55,62)
+SIMU #5.00
+ZOOM(5,0,65,70)
+REC(15,44,35,18,NW)
+REC(16,58,6,4,DN)
+REC(18,59,2,2,CO)
+REC(22,46,6,8,DP)
+REC(32,46,6,8,DP)
+REC(28,46,4,8,DP)
+REC(22,28,6,8,DN)
+REC(32,28,6,8,DN)
+REC(28,28,4,8,DN)
+REC(22,14,6,8,DN)
+REC(32,14,6,8,DN)
+REC(28,14,4,8,DN)
+REC(24,15,2,2,CO)
+REC(34,15,2,2,CO)
+REC(24,29,2,2,CO)
+REC(34,29,2,2,CO)
+REC(24,47,2,2,CO)
+REC(34,47,2,2,CO)
+REC(28,12,4,12,PO)
+REC(28,26,4,12,PO)
+REC(28,44,4,12,PO)
+REC(10,18,18,4,PO)
+REC(10,32,18,4,PO)
+REC(10,8,45,4,ME)
+REC(23,8,4,9,ME)
+REC(33,15,4,16,ME)
+REC(23,29,4,20,ME)
+REC(33,47,4,13,ME)
+REC(10,58,45,4,ME)
+TITLE 32 60  #Vdd
+$1 1000 0 
+TITLE 32 10  #Vss
+$0 1000 0 
+TITLE 12 20  #Vin_cs
+$c 1000 0 0.4500 0.5000 0.9500 1.0000 
+TITLE 12 34  #Vb_cg
+$1 500 0 
+TITLE 25 40  #Vo_cascode
+$v 1000 0 
+TITLE 28 46  #Vbias_load
+$1 500 0 
+TITLE 12 62  #Cascode Amplifier (CS + CG)
+$- 1000 0 
+FFIG C:\Users\admin\Desktop\praticals\ADCMOS\ADCMOS_Exam_Files\Microwind_msk\Exp02_Cascode_Amplifier\Exp02_cascode_amplifier_layout.MSK
