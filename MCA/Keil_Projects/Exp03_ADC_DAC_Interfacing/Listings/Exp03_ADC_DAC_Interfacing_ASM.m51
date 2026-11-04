@@ -1,0 +1,34 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    11/04/2026  18:14:49  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP03_ADC_DAC_INTERFACING\OUTPUT\EXP03_AD
+>> C_DAC_INTERFACING_ASM.OBJ TO C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP03_ADC_DAC_INTERFACING\OUTPUT\EXP0
+>> 3_ADC_DAC_INTERFACING_ASM.ABS PRINT (c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp03_ADC_DAC_Interfacing\Lis
+>> tings\Exp03_ADC_DAC_Interfacing_ASM.m51)
+
+
+INPUT MODULES INCLUDED:
+  C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP03_ADC_DAC_INTERFACING\OUTPUT\EXP03_ADC_DAC_INTERFACING_ASM.OBJ 
+>> (DAC_GENERATE)
+
+
+LINK MAP OF MODULE:  C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP03_ADC_DAC_INTERFACING\OUTPUT\EXP03_ADC_DAC_I
+>> NTERFACING_ASM.ABS (DAC_GENERATE)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     000FH     ABSOLUTE     
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 000FH BYTE ( 0%) *
+******************************************************************************
+
+Program Size: data=8.0 xdata=0 code=15
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

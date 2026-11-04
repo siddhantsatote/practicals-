@@ -1,0 +1,65 @@
+A51 MACRO ASSEMBLER  BUTTON_LED                                                           11/04/2026 18:14:50 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp05_Button_LED_Interfacing\Output\Exp05_Button_LED_Interfacing_ASM.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp05_Button_LED_Int
+                      erfacing\button_led.asm OBJECT(c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp05_Button_LED
+                      _Interfacing\Output\Exp05_Button_LED_Interfacing_ASM.obj) PRINT(c:\Users\admin\Desktop\praticals\M
+                      CA\Keil_Projects\Exp05_Button_LED_Interfacing\Listings\Exp05_Button_LED_Interfacing_ASM.lst) 
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ; ==============================================================================
+                       2     ; Experiment 05: Button & LED Interfacing (8051 Assembly)
+                       3     ; ==============================================================================
+                       4     
+0000                   5     ORG 0000H
+                       6     
+0000 D2B2              7         SETB P3.2           ; Make P3.2 input for push button
+0002 7590FF            8         MOV P1, #0FFH       ; Turn off all LEDs
+                       9     
+0005                  10     MONITOR:
+0005 30B20C           11         JNB P3.2, BTN_PRESS ; If button is pressed (LOW), jump to BTN_PRESS
+0008 7590AA           12         MOV P1, #0AAH       ; Pattern 1: alternate LEDs
+000B 1120             13         ACALL DELAY
+000D 759055           14         MOV P1, #55H        ; Pattern 2: alternate LEDs
+0010 1120             15         ACALL DELAY
+0012 80F1             16         SJMP MONITOR
+                      17     
+0014                  18     BTN_PRESS:
+0014 759000           19         MOV P1, #00H        ; All LEDs ON
+0017 1120             20         ACALL DELAY
+0019 7590FF           21         MOV P1, #0FFH       ; All LEDs OFF
+001C 1120             22         ACALL DELAY
+001E 80E5             23         SJMP MONITOR
+                      24     
+0020                  25     DELAY:
+0020 7AC8             26         MOV R2, #200
+0022 7BFA             27     D1: MOV R3, #250
+0024 DBFE             28     D2: DJNZ R3, D2
+0026 DAFA             29         DJNZ R2, D1
+0028 22               30         RET
+                      31     
+                      32     END
+A51 MACRO ASSEMBLER  BUTTON_LED                                                           11/04/2026 18:14:50 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+BTN_PRESS. . . . .  C ADDR   0014H   A   
+D1 . . . . . . . .  C ADDR   0022H   A   
+D2 . . . . . . . .  C ADDR   0024H   A   
+DELAY. . . . . . .  C ADDR   0020H   A   
+MONITOR. . . . . .  C ADDR   0005H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

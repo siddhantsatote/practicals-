@@ -1,0 +1,42 @@
+================================================================================
+MCA (MICROCONTROLLERS & APPLICATIONS) MASTER VIVA QUESTION BANK
+ALARD COLLEGE OF ENGINEERING & MANAGEMENT - SPPU CURRICULUM
+================================================================================
+
+1. What are the key differences between a Microprocessor and a Microcontroller?
+   - Microprocessor (e.g. 8085, 8086): Contains only CPU; RAM, ROM, Timers, and I/O ports must be connected externally.
+   - Microcontroller (e.g. 8051, PIC): Integrates CPU, RAM, ROM, Timers, Serial Port, and I/O ports onto a single IC chip.
+
+2. State the basic features of 8051 Microcontroller.
+   - 8-bit CPU with registers A (Accumulator) and B.
+   - 4 KB on-chip Program ROM (Flash in AT89C51).
+   - 128 bytes on-chip Data RAM.
+   - 32 bidirectional I/O pins grouped into four 8-bit ports (P0, P1, P2, P3).
+   - Two 16-bit Timers/Counters (Timer 0, Timer 1).
+   - Full-duplex UART serial communication interface.
+   - 5-source, 2-priority level interrupt structure.
+
+3. Why does Port 0 require external pull-up resistors on standard 8051?
+   - Port 0 has open-drain outputs (no internal pull-up transistors) to function as the multiplexed low-order
+     address/data bus (AD0-AD7). When used as general I/O, external 10k pull-up resistors are mandatory.
+
+4. Explain the function of the EA pin (Pin 31).
+   - External Access: When connected to VCC (+5V), the 8051 executes program code from internal on-chip ROM (0000H-0FFFH).
+     When grounded (0V), the 8051 fetches all instructions from external memory.
+
+5. What is the role of the ALE pin (Pin 30)?
+   - Address Latch Enable: Emits a pulse to latch the lower 8 bits of address (A0-A7) from the multiplexed Port 0 bus into
+     an external 74LS373 latch during external memory access.
+
+6. What are the 5 interrupt sources in standard 8051 and their vector addresses?
+   1. External Interrupt 0 (INT0) : 0003H
+   2. Timer 0 Interrupt (TF0)     : 000BH
+   3. External Interrupt 1 (INT1) : 0013H
+   4. Timer 1 Interrupt (TF1)     : 001BH
+   5. Serial Port Interrupt (TI/RI): 0023H
+
+7. How is baud rate generated for UART in 8051?
+   - Timer 1 in Mode 2 (8-bit auto-reload) is used.
+   - Baud Rate = (2^SMOD / 32) * (Fosc / (12 * (256 - TH1))).
+   - With Fosc = 11.0592 MHz and SMOD=0, TH1 = 256 - 3 = 253 = 0xFD for 9600 baud.
+================================================================================

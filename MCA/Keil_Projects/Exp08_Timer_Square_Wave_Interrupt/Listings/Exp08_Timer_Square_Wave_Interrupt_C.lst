@@ -1,0 +1,79 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              11/04/2026 18:14:51 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp08_Timer_Square_Wave_Interrupt\Output\Exp08_Timer_Square_Wave_Interrupt_C.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp08_Timer_Square_Wa
+                    -ve_Interrupt\main.c OBJECT(c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp08_Timer_Square_Wave_Interrupt\Output\E
+                    -xp08_Timer_Square_Wave_Interrupt_C.obj) PRINT(c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp08_Timer_Square_Wave
+                    -_Interrupt\Listings\Exp08_Timer_Square_Wave_Interrupt_C.lst) INCDIR(C:\Keil_v5\C51\INC)
+
+line level    source
+
+   1          /*
+   2           * Experiment 08: Square Wave Generation using 8051 Timer & Interrupt
+   3           * Target Pin: Port 1.0 (P1.0) and Port 1.5 (P1.5)
+   4           * Crystal Frequency: 11.0592 MHz
+   5           * Timer 0 configured in Mode 1 (16-bit Timer)
+   6           * Demonstrates:
+   7           *   1. Hardware Timer Interrupt (ISR vector 0x000B, interrupt 1)
+   8           *   2. 50% Duty cycle square wave generation
+   9           *   3. Verification with Keil Logic Analyzer
+  10           */
+  11          
+  12          #include <reg51.h>
+  13          
+  14          sbit WAVE_OUT  = P1^0;
+  15          sbit WAVE_OUT2 = P1^5;
+  16          
+  17          // Timer 0 Interrupt Service Routine (Vector 1 at 000BH)
+  18          void timer0_isr(void) interrupt 1 {
+  19   1          // Reload timer values for 10 ms half-period (10 ms high, 10 ms low = 20 ms period / 50 Hz)
+  20   1          // 10 ms / 1.085 us = 9216 machine cycles -> 65536 - 9216 = 56320 = 0xDC00
+  21   1          TH0 = 0xDC;
+  22   1          TL0 = 0x00;
+  23   1      
+  24   1          // Toggle output pins
+  25   1          WAVE_OUT  = ~WAVE_OUT;
+  26   1          WAVE_OUT2 = ~WAVE_OUT2;
+  27   1      }
+  28          
+  29          void main(void) {
+  30   1          WAVE_OUT  = 0;
+  31   1          WAVE_OUT2 = 0;
+  32   1      
+  33   1          // 1. Configure Timer 0 in Mode 1 (16-bit timer)
+  34   1          TMOD = 0x01;
+  35   1      
+  36   1          // 2. Load initial count
+  37   1          TH0 = 0xDC;
+  38   1          TL0 = 0x00;
+  39   1      
+  40   1          // 3. Enable Timer 0 Interrupt and Global Interrupts
+  41   1          ET0 = 1; // Enable Timer 0 interrupt
+  42   1          EA  = 1; // Enable global interrupt flag
+  43   1      
+  44   1          // 4. Start Timer 0
+  45   1          TR0 = 1;
+  46   1      
+  47   1          // Background loop - CPU is free for other tasks while timer interrupt generates wave
+  48   1          while (1) {
+  49   2              // System alive indicator
+  50   2          }
+  51   1      }
+
+C51 COMPILER V9.60.7.0   MAIN                                                              11/04/2026 18:14:51 PAGE 2   
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     32    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

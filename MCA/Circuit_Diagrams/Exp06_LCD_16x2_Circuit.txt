@@ -1,0 +1,14 @@
+================================================================================
+EXPERIMENT 06: 16x2 LCD DISPLAY INTERFACING CIRCUIT
+================================================================================
+
+8051 Pin         LCD Pin (HD44780)      Description
+--------------------------------------------------------------------------------
+P2.0 - P2.7   -> D0 - D7 (Pins 7-14)    8-Bit Bidirectional Data Bus
+P3.5 (Pin 15) -> RS (Pin 4)             Register Select (0=Cmd, 1=Data)
+P3.6 (Pin 16) -> RW (Pin 5)             Read/Write (0=Write, 1=Read)
+P3.7 (Pin 17) -> EN (Pin 6)             Enable Clock (High-to-Low pulse)
++5V           -> VDD (Pin 2), BLA (15)  Logic Power & Backlight Anode
+GND           -> VSS (Pin 1), BLK (16)  Ground & Backlight Cathode
+Pot wiper     -> V0 (Pin 3)             Contrast Adjust (10k Potentiometer)
+================================================================================

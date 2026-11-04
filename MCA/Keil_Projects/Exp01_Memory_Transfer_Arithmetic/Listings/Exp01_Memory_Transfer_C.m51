@@ -1,0 +1,83 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    11/04/2026  18:14:48  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP01_MEMORY_TRANSFER_ARITHMETIC\OUTPUT\E
+>> XP01_MEMORY_TRANSFER_C.OBJ TO C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP01_MEMORY_TRANSFER_ARITHMETIC\OUT
+>> PUT\EXP01_MEMORY_TRANSFER_C.ABS PRINT (c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp01_Memory_Transfer_Arith
+>> metic\Listings\Exp01_Memory_Transfer_C.m51)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP01_MEMORY_TRANSFER_ARITHMETIC\OUTPUT\EXP01_MEMORY_TRANSFER_C.OBJ
+>>  (MAIN)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C?IMUL)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP01_MEMORY_TRANSFER_ARITHMETIC\OUTPUT\EXP01_ME
+>> MORY_TRANSFER_C.ABS (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0010H     UNIT         ?DT?MAIN
+            IDATA   0018H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     008CH     UNIT         ?C_C51STARTUP
+            CODE    088CH     002AH     UNIT         ?PR?ARITHMETIC_OPERATIONS_DEMO?MAIN
+            CODE    08B6H     0013H     UNIT         ?PR?BLOCK_TRANSFER_DEMO?MAIN
+            CODE    08C9H     0012H     UNIT         ?C?LIB_CODE
+            CODE    08DBH     0011H     UNIT         ?PR?MAIN?MAIN
+            CODE    08ECH     0008H     UNIT         ?C_INITSEG
+            CODE    08F4H     0004H     UNIT         ?PR?MEMORY_TRANSFER_DEMO?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP01_MEMORY_TRANSFER_ARITHMETIC\OUTPUT\EXP0
+>> 1_MEMORY_TRANSFER_C.ABS (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN
+  +--> ?PR?MEMORY_TRANSFER_DEMO?MAIN
+  +--> ?PR?BLOCK_TRANSFER_DEMO?MAIN
+  +--> ?PR?ARITHMETIC_OPERATIONS_DEMO?MAIN
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  11/04/2026  18:14:48  PAGE 2
+
+
+
+
+
+SYMBOL TABLE OF MODULE:  C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP01_MEMORY_TRANSFER_ARITHMETIC\OUTPUT\EXP0
+>> 1_MEMORY_TRANSFER_C.ABS (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C?IMUL
+  C:08C9H         PUBLIC        ?C?IMUL
+  -------         ENDMOD        ?C?IMUL
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0059H BYTE ( 4%) *
+******************************************************************************
+
+Program Size: data=25.0 xdata=0 code=251
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

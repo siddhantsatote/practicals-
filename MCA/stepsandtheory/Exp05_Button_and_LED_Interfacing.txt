@@ -1,0 +1,19 @@
+================================================================================
+EXPERIMENT 05: BUTTON AND LED INTERFACING
+================================================================================
+
+1. AIM:
+   To interface push button switches and 8 LEDs to 8051 and program interactive
+   lighting patterns with button debouncing.
+
+2. THEORY:
+   - Port 1 is connected to 8 LEDs. When a pin is driven LOW, LED turns ON (active-low mode).
+   - Push button is connected to P3.2 with an external 10k pull-up resistor.
+   - Switch Debounce: Mechanical switches vibrate for 10-20 ms upon contact.
+     Software debouncing uses a 20 ms delay after detecting a press to ensure steady state.
+
+3. VIVA QUESTIONS & ANSWERS:
+   Q1: Why must an 8051 port pin be written with '1' before being used as an input?
+   A1: Writing '1' turns off the internal pull-down FET, allowing the internal pull-up resistor
+       to hold the pin high so external devices can pull it low.
+================================================================================

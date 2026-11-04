@@ -1,0 +1,23 @@
+================================================================================
+EXPERIMENT 09: UART SERIAL COMMUNICATION WITH PC
+================================================================================
+
+1. AIM:
+   To establish full-duplex serial communication between 8051 and PC
+   at 9600 baud rate using 8051 UART and MAX232 level converter.
+
+2. REGISTERS & CONFIGURATION:
+   - SCON = 0x50: Mode 1 (8-bit UART, variable baud rate, REN=1 receive enabled).
+   - TMOD = 0x20: Timer 1 Mode 2 (8-bit auto-reload for baud rate generation).
+   - TH1 = 0xFD: Reload value for 9600 baud with 11.0592 MHz crystal.
+   - PCON.7 (SMOD) = 0: Standard baud rate.
+   - TI flag is monitored for transmit complete; RI flag for receive complete.
+
+3. VIVA QUESTIONS & ANSWERS:
+   Q1: Why is an 11.0592 MHz crystal standard in 8051 microcontroller boards?
+   A1: 11.0592 MHz divided by 12 yields 921.6 kHz, which divides evenly into standard UART baud rates
+       (9600, 4800, 2400) with 0% timing error. A 12 MHz crystal produces a 2.1% error, causing framing errors.
+   Q2: Why is the MAX232 IC necessary between 8051 and PC RS-232 port?
+   A2: 8051 operates at TTL logic levels (0V to 5V), whereas PC RS-232 uses bipolar levels (+12V for logic 0,
+       -12V for logic 1). MAX232 translates and inverts these levels bidirectionally.
+================================================================================

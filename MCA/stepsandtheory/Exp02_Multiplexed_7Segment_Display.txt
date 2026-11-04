@@ -1,0 +1,37 @@
+================================================================================
+EXPERIMENT 02: INTERFACING OF MULTIPLEXED 7-SEGMENT DISPLAY
+================================================================================
+
+1. AIM:
+   To interface two multiplexed common cathode 7-segment displays to 8051
+   and display numbers using persistence of vision.
+
+2. THEORY & MULTIPLEXING PRINCIPLE:
+   - Display Multiplexing: Segment pins (a-g, dp) of both displays are connected
+     in parallel to Port 1.
+   - Ground/Common pins of the displays are individually enabled using switching transistors.
+   - When Display 1 is active (P3.0=1), Port 1 outputs digit 1's pattern.
+   - When Display 2 is active (P3.1=1), Port 1 outputs digit 2's pattern.
+   - By cycling between displays every 1 to 2 milliseconds (> 50 Hz refresh rate),
+     human Persistence of Vision causes both digits to appear continuously lit without flicker.
+   - Advantage: Requires only 10 micro-controller pins (8 data + 2 enable) instead of 16 pins.
+
+3. LOOKUP TABLE (COMMON CATHODE):
+   Digit 0: 0x3F | Digit 1: 0x06 | Digit 2: 0x5B | Digit 3: 0x4F | Digit 4: 0x66
+   Digit 5: 0x6D | Digit 6: 0x7D | Digit 7: 0x07 | Digit 8: 0x7F | Digit 9: 0x6F
+
+4. STEP-BY-STEP PROCEDURE IN KEIL uVISION5:
+   1. Open 'Exp02_Multiplexed_7Segment.uvproj' in Keil uVision5.
+   2. Build Target (F7) to generate the HEX file in Output\.
+   3. Start Debugger (Ctrl+F5).
+   4. Open 'Peripherals -> I/O-Ports -> Port 1' and 'Port 3'.
+   5. Run simulation (F5) or Step (F11) to observe alternating Port 1 patterns and P3 bits.
+
+5. VIVA QUESTIONS & ANSWERS:
+   Q1: What is Persistence of Vision?
+   A1: The phenomenon of the human eye where an image persists on the retina for about 1/16th of a
+       second. If displays are refreshed faster than this, they appear constantly illuminated.
+   Q2: Why are driver transistors (e.g. BC547) needed for display common pins?
+   A2: The common pin must sink the current from all 7 segments simultaneously (up to 7 x 15mA = 105mA),
+       which exceeds the maximum current sinking capacity of an 8051 port pin.
+================================================================================

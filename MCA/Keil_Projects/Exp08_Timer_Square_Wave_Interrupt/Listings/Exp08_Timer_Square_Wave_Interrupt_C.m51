@@ -1,0 +1,57 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    11/04/2026  18:14:51  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP08_TIMER_SQUARE_WAVE_INTERRUPT\OUTPUT\
+>> EXP08_TIMER_SQUARE_WAVE_INTERRUPT_C.OBJ TO C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP08_TIMER_SQUARE_WAVE
+>> _INTERRUPT\OUTPUT\EXP08_TIMER_SQUARE_WAVE_INTERRUPT_C.ABS PRINT (c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\E
+>> xp08_Timer_Square_Wave_Interrupt\Listings\Exp08_Timer_Square_Wave_Interrupt_C.m51)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP08_TIMER_SQUARE_WAVE_INTERRUPT\OUTPUT\EXP08_TIMER_SQUARE_WAVE_IN
+>> TERRUPT_C.OBJ (MAIN)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP08_TIMER_SQUARE_WAVE_INTERRUPT\OUTPUT\EXP08_T
+>> IMER_SQUARE_WAVE_INTERRUPT_C.ABS (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     0008H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+                    000EH     07F2H                  *** GAP ***
+            CODE    0800H     0015H     UNIT         ?PR?MAIN?MAIN
+            CODE    0815H     000CH     UNIT         ?C_C51STARTUP
+            CODE    0821H     000BH     UNIT         ?PR?TIMER0_ISR?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP08_TIMER_SQUARE_WAVE_INTERRUPT\OUTPUT\EXP
+>> 08_TIMER_SQUARE_WAVE_INTERRUPT_C.ABS (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0023H BYTE ( 1%) *
+******************************************************************************
+
+Program Size: data=9.0 xdata=0 code=50
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

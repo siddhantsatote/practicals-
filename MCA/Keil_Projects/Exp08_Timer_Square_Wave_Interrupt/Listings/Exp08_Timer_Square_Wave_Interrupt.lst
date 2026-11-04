@@ -1,0 +1,58 @@
+A51 MACRO ASSEMBLER  SQUARE_WAVE                                                          11/04/2026 18:14:51 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp08_Timer_Square_Wave_Interrupt\Output\Exp08_Timer_Square_Wave_Interrupt.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp08_Timer_Square_W
+                      ave_Interrupt\square_wave.asm OBJECT(c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp08_Time
+                      r_Square_Wave_Interrupt\Output\Exp08_Timer_Square_Wave_Interrupt.obj) PRINT(c:\Users\admin\Desktop
+                      \praticals\MCA\Keil_Projects\Exp08_Timer_Square_Wave_Interrupt\Listings\Exp08_Timer_Square_Wave_Interrupt.lst) 
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ; ==============================================================================
+                       2     ; Experiment 08: Square Wave Generation (8051 Assembly)
+                       3     ; Page 48 of Alard College MCA Lab Manual
+                       4     ; ==============================================================================
+                       5     
+0000                   6     ORG 0000H
+                       7     
+0000                   8     HERE:
+0000 B290              9         CPL P1.0            ; Complement P1.0 to generate square wave
+0002 1106             10         ACALL DELAY         ; Call 20 ms delay
+0004 80FA             11         SJMP HERE
+                      12     
+                      13     ; Delay subroutine using nested register loop
+0006                  14     DELAY:
+0006 7A14             15         MOV R2, #20
+0008                  16     UP:
+0008 7B64             17         MOV R3, #100
+000A                  18     WAIT1:
+000A 7C14             19         MOV R4, #20
+000C                  20     WAIT:
+000C DCFE             21         DJNZ R4, WAIT
+000E DBFA             22         DJNZ R3, WAIT1
+0010 DAF6             23         DJNZ R2, UP
+0012 22               24         RET
+                      25     
+                      26     END
+A51 MACRO ASSEMBLER  SQUARE_WAVE                                                          11/04/2026 18:14:51 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DELAY. . . . . . .  C ADDR   0006H   A   
+HERE . . . . . . .  C ADDR   0000H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+UP . . . . . . . .  C ADDR   0008H   A   
+WAIT . . . . . . .  C ADDR   000CH   A   
+WAIT1. . . . . . .  C ADDR   000AH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

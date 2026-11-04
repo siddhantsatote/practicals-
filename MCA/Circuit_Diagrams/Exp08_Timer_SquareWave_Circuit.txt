@@ -1,0 +1,19 @@
+================================================================================
+EXPERIMENT 08: TIMER SQUARE WAVE GENERATION CIRCUIT
+================================================================================
+
+8051 Pin         Instrument Connection
+--------------------------------------------------------------------------------
+P1.0 (Pin 1)  -> Channel 1 (CRO / Oscilloscope / Logic Analyzer)
+P1.5 (Pin 6)  -> Channel 2 (CRO / Oscilloscope / Logic Analyzer)
+GND (Pin 20)  -> Ground Probe of Oscilloscope
+
+Frequency Calculation:
+  Fosc = 11.0592 MHz
+  Machine cycle clock = 11.0592 MHz / 12 = 921.6 kHz (Period = 1.085 us)
+  Desired Half-Period: Thalf = 10 ms
+  Required Counts: N = 10 ms / 1.085 us = 9216 cycles
+  Timer 0 Initial Reload Value (16-bit Mode 1):
+    Count = 65536 - 9216 = 56320 = 0xDC00 (TH0 = 0xDC, TL0 = 0x00)
+  Square Wave Frequency = 1 / (2 * 10 ms) = 50 Hz (20 ms period)
+================================================================================

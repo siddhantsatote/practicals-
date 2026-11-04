@@ -1,0 +1,68 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    11/04/2026  18:14:49  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP02_MULTIPLEXED_7SEGMENT\OUTPUT\EXP02_M
+>> ULTIPLEXED_7SEGMENT_C.OBJ TO C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP02_MULTIPLEXED_7SEGMENT\OUTPUT\EXP
+>> 02_MULTIPLEXED_7SEGMENT_C.ABS PRINT (c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp02_Multiplexed_7Segment\Li
+>> stings\Exp02_Multiplexed_7Segment_C.m51)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP02_MULTIPLEXED_7SEGMENT\OUTPUT\EXP02_MULTIPLEXED_7SEGMENT_C.OBJ 
+>> (MAIN)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP02_MULTIPLEXED_7SEGMENT\OUTPUT\EXP02_MULTIPLE
+>> XED_7SEGMENT_C.ABS (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0003H     UNIT         _DATA_GROUP_
+            IDATA   000BH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     0033H     UNIT         ?PR?MAIN?MAIN
+            CODE    0833H     0030H     UNIT         ?PR?_DISPLAY_TWO_DIGITS?MAIN
+            CODE    0863H     0020H     UNIT         ?PR?_DELAY_MS?MAIN
+            CODE    0883H     000CH     UNIT         ?C_C51STARTUP
+            CODE    088FH     000AH     UNIT         ?CO?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP02_MULTIPLEXED_7SEGMENT\OUTPUT\EXP02_MULT
+>> IPLEXED_7SEGMENT_C.ABS (MAIN)
+
+
+SEGMENT                                DATA_GROUP 
+  +--> CALLED SEGMENT                START    LENGTH
+----------------------------------------------------
+?C_C51STARTUP                        -----    -----
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN                        0008H    0003H
+  +--> ?PR?_DISPLAY_TWO_DIGITS?MAIN
+
+?PR?_DISPLAY_TWO_DIGITS?MAIN         -----    -----
+  +--> ?CO?MAIN
+  +--> ?PR?_DELAY_MS?MAIN
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 008DH BYTE ( 6%) *
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  11/04/2026  18:14:49  PAGE 2
+
+
+******************************************************************************
+
+Program Size: data=12.0 xdata=0 code=156
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

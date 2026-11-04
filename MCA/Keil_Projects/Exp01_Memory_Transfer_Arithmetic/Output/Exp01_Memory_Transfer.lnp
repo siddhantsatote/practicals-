@@ -1,0 +1,4 @@
+".\Output\main.obj",
+".\Output\memory_ops.obj" 
+TO ".\Output\Exp01_Memory_Transfer" 
+PRINT(".\Listings\Exp01_Memory_Transfer.m51")

@@ -1,0 +1,34 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    11/04/2026  18:14:50  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP05_BUTTON_LED_INTERFACING\OUTPUT\EXP05
+>> _BUTTON_LED_INTERFACING.OBJ TO C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP05_BUTTON_LED_INTERFACING\OUTPUT
+>> \EXP05_BUTTON_LED_INTERFACING.ABS PRINT (c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp05_Button_LED_Interfac
+>> ing\Listings\Exp05_Button_LED_Interfacing.m51)
+
+
+INPUT MODULES INCLUDED:
+  C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP05_BUTTON_LED_INTERFACING\OUTPUT\EXP05_BUTTON_LED_INTERFACING.OB
+>> J (BUTTON_LED)
+
+
+LINK MAP OF MODULE:  C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP05_BUTTON_LED_INTERFACING\OUTPUT\EXP05_BUTTON
+>> _LED_INTERFACING.ABS (BUTTON_LED)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0029H     ABSOLUTE     
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0029H BYTE ( 2%) *
+******************************************************************************
+
+Program Size: data=8.0 xdata=0 code=41
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

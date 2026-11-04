@@ -1,0 +1,85 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              11/04/2026 18:14:48 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp01_Memory_Transfer_Arithmetic\Output\Exp01_Memory_Transfer_C.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp01_Memory_Transfer
+                    -_Arithmetic\main.c OBJECT(c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp01_Memory_Transfer_Arithmetic\Output\Exp
+                    -01_Memory_Transfer_C.obj) PRINT(c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp01_Memory_Transfer_Arithmetic\List
+                    -ings\Exp01_Memory_Transfer_C.lst) INCDIR(C:\Keil_v5\C51\INC)
+
+line level    source
+
+   1          /*
+   2           * Experiment 01: Simple Programs on Memory Transfer & Arithmetic Operations
+   3           * Target: AT89C51 / 8051 Microcontroller
+   4           * Toolchain: Keil C51
+   5           */
+   6          
+   7          #include <reg51.h>
+   8          
+   9          // Function declarations
+  10          void memory_transfer_demo(void);
+  11          void block_transfer_demo(void);
+  12          void arithmetic_operations_demo(void);
+  13          
+  14          // Global test variables
+  15          unsigned char data src_block[5] = {0x11, 0x22, 0x33, 0x44, 0x55};
+  16          unsigned char data dst_block[5];
+  17          
+  18          unsigned char sum_res, sub_res;
+  19          unsigned int  mul_res;
+  20          unsigned char div_quot, div_rem;
+  21          
+  22          void main(void) {
+  23   1          memory_transfer_demo();
+  24   1          block_transfer_demo();
+  25   1          arithmetic_operations_demo();
+  26   1      
+  27   1          // Prevent program from exiting code space (avoids Keil Error 65)
+  28   1          while (1) {
+  29   2              P1 = 0x55;
+  30   2              P1 = 0xAA;
+  31   2          }
+  32   1      }
+  33          
+  34          void memory_transfer_demo(void) {
+  35   1          unsigned char val;
+  36   1          val = 0x23;          // Immediate addressing (MOV A, #23H)
+  37   1          P1 = val;            // Direct addressing to Port 1
+  38   1      }
+  39          
+  40          void block_transfer_demo(void) {
+  41   1          unsigned char i;
+  42   1          // Block transfer 5 bytes from source to destination
+  43   1          for (i = 0; i < 5; i++) {
+  44   2              dst_block[i] = src_block[i];
+  45   2          }
+  46   1      }
+  47          
+  48          void arithmetic_operations_demo(void) {
+  49   1          unsigned char a = 0x0A;
+  50   1          unsigned char b = 0x03;
+  51   1      
+  52   1          sum_res  = a + b;           // 0x0D (13)
+C51 COMPILER V9.60.7.0   MAIN                                                              11/04/2026 18:14:48 PAGE 2   
+
+  53   1          sub_res  = a - b;           // 0x07 (7)
+  54   1          mul_res  = (unsigned int)a * b; // 0x1E (30)
+  55   1          div_quot = a / b;           // 0x03 (3)
+  56   1          div_rem  = a % b;           // 0x01 (1)
+  57   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     82    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     16    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,29 @@
+================================================================================
+EXPERIMENT 02: MULTIPLEXED 7-SEGMENT DISPLAY INTERFACING
+================================================================================
+
+Microcontroller: 8051 (AT89C51 / AT89S52)
+Displays: Two Common-Cathode 7-Segment Displays (DISP1, DISP2)
+
+Connections:
+  8051 Pin         Display Segment     Description
+  -------------------------------------------------------------
+  P1.0 (Pin 1)  -> Segment 'a'         via 330 ohm resistor R3
+  P1.1 (Pin 2)  -> Segment 'b'         via 330 ohm resistor R4
+  P1.2 (Pin 3)  -> Segment 'c'         via 330 ohm resistor R5
+  P1.3 (Pin 4)  -> Segment 'd'         via 330 ohm resistor R6
+  P1.4 (Pin 5)  -> Segment 'e'         via 330 ohm resistor R7
+  P1.5 (Pin 6)  -> Segment 'f'         via 330 ohm resistor R8
+  P1.6 (Pin 7)  -> Segment 'g'         via 330 ohm resistor R9
+  P1.7 (Pin 8)  -> Segment 'dp'        via 330 ohm resistor R10
+
+Multiplexing Transistor Switches (NPN BC547):
+  P3.0 (Pin 10) -> Base of Q1 via 560 ohm R11 -> Collector to DISP1 Common Cathode
+  P3.1 (Pin 11) -> Base of Q2 via 560 ohm R12 -> Collector to DISP2 Common Cathode
+  Emitter of Q1, Q2 -> GND
+
+Oscillator & Reset:
+  XTAL1 (Pin 19), XTAL2 (Pin 18) -> 11.0592 MHz Crystal + two 33 pF capacitors to GND
+  RST (Pin 9)                    -> 10 uF capacitor to VCC (+5V), 10 k resistor to GND
+  EA/VPP (Pin 31)                -> Connected to VCC (+5V) for internal ROM execution
+================================================================================

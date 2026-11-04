@@ -1,0 +1,34 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    11/04/2026  18:14:49  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP02_MULTIPLEXED_7SEGMENT\OUTPUT\EXP02_M
+>> ULTIPLEXED_7SEGMENT_ASM.OBJ TO C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP02_MULTIPLEXED_7SEGMENT\OUTPUT\E
+>> XP02_MULTIPLEXED_7SEGMENT_ASM.ABS PRINT (c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp02_Multiplexed_7Segmen
+>> t\Listings\Exp02_Multiplexed_7Segment_ASM.m51)
+
+
+INPUT MODULES INCLUDED:
+  C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP02_MULTIPLEXED_7SEGMENT\OUTPUT\EXP02_MULTIPLEXED_7SEGMENT_ASM.OB
+>> J (SEVEN_SEG)
+
+
+LINK MAP OF MODULE:  C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP02_MULTIPLEXED_7SEGMENT\OUTPUT\EXP02_MULTIPLE
+>> XED_7SEGMENT_ASM.ABS (SEVEN_SEG)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     001DH     ABSOLUTE     
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 001DH BYTE ( 1%) *
+******************************************************************************
+
+Program Size: data=8.0 xdata=0 code=29
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

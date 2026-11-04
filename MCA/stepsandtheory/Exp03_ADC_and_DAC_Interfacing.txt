@@ -1,0 +1,29 @@
+================================================================================
+EXPERIMENT 03: INTERFACING 8051 WITH ADC0804 AND DAC0808
+================================================================================
+
+1. AIM:
+   To interface 8051 microcontroller with ADC0804 to convert analog signals
+   to 8-bit digital values, and DAC0808 to generate analog waveforms.
+
+2. THEORY:
+   - ADC0804 is an 8-bit Successive Approximation Register (SAR) ADC.
+     Conversion steps:
+     1. Pulse WR low then high to start conversion.
+     2. Wait for INTR line to go LOW, signaling conversion complete.
+     3. Drive RD low to read digital byte from Port 1.
+   - DAC0808 is an 8-bit current-output multiplying DAC.
+     Output current Iout is converted to voltage using an operational amplifier (LM741).
+     Vout = Vref * (Digital_Byte / 256).
+
+3. WAVEFORM GENERATION LOGIC:
+   - Ramp / Sawtooth: Increment DAC byte in a loop from 0x00 to 0xFF.
+   - Triangular: Increment from 0x00 to 0xFF, then decrement back to 0x00.
+   - Square Wave: Alternate outputting 0x00 and 0xFF with equal time delays.
+
+4. VIVA QUESTIONS & ANSWERS:
+   Q1: What is the resolution of an 8-bit ADC with 5V reference?
+   A1: Step size = Vref / 2^8 = 5V / 256 = 19.53 mV per LSB.
+   Q2: What is the function of the INTR pin in ADC0804?
+   A2: It goes active-low when conversion is complete (End of Conversion / EOC).
+================================================================================

@@ -1,0 +1,92 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              11/04/2026 18:14:51 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp09_UART_Serial_Communication\Output\Exp09_UART_Serial_Communication_C.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp09_UART_Serial_Com
+                    -munication\main.c OBJECT(c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp09_UART_Serial_Communication\Output\Exp09
+                    -_UART_Serial_Communication_C.obj) PRINT(c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp09_UART_Serial_Communicati
+                    -on\Listings\Exp09_UART_Serial_Communication_C.lst) INCDIR(C:\Keil_v5\C51\INC)
+
+line level    source
+
+   1          /*
+   2           * Experiment 09: 8051 Serial Port (UART) Communication with PC (Both-Way)
+   3           * Baud Rate: 9600 Baud
+   4           * Crystal: 11.0592 MHz
+   5           * Configuration:
+   6           *   SCON = 0x50 (Mode 1, 8-bit UART, REN enabled)
+   7           *   TMOD = 0x20 (Timer 1 Mode 2, 8-bit auto-reload)
+   8           *   TH1  = 0xFD (-3 for 9600 baud)
+   9           */
+  10          
+  11          #include <reg51.h>
+  12          
+  13          void uart_init(void) {
+  14   1          SCON = 0x50; // Mode 1: 8-bit UART, Receive Enable (REN=1)
+  15   1          TMOD = 0x20; // Timer 1 Mode 2 (8-bit auto-reload)
+  16   1          TH1  = 0xFD; // 9600 Baud rate with 11.0592 MHz crystal (-3)
+  17   1          TR1  = 1;    // Start Timer 1
+  18   1          TI   = 0;    // Clear Transmit Interrupt flag
+  19   1          RI   = 0;    // Clear Receive Interrupt flag
+  20   1      }
+  21          
+  22          void uart_tx_char(char ch) {
+  23   1          SBUF = ch;         // Load character into Serial Buffer
+  24   1          while (TI == 0);   // Wait for transmission to finish
+  25   1          TI = 0;            // Clear flag for next transmission
+  26   1      }
+  27          
+  28          void uart_tx_string(char *str) {
+  29   1          while (*str) {
+  30   2              uart_tx_char(*str++);
+  31   2          }
+  32   1      }
+  33          
+  34          char uart_rx_char(void) {
+  35   1          while (RI == 0);   // Wait for character to arrive
+  36   1          RI = 0;            // Clear receive flag
+  37   1          return SBUF;       // Return received character
+  38   1      }
+  39          
+  40          void main(void) {
+  41   1          char received_char;
+  42   1      
+  43   1          uart_init();
+  44   1      
+  45   1          // Send welcome banner to PC Serial Terminal
+  46   1          uart_tx_string("\r\n========================================\r\n");
+  47   1          uart_tx_string("  ALARD COLLEGE OF ENGG - MCA LAB      \r\n");
+  48   1          uart_tx_string("  8051 SERIAL UART COMMUNICATION (9600)\r\n");
+  49   1          uart_tx_string("========================================\r\n");
+  50   1          uart_tx_string("Type any key on PC keyboard to echo:\r\n");
+  51   1      
+  52   1          while (1) {
+C51 COMPILER V9.60.7.0   MAIN                                                              11/04/2026 18:14:51 PAGE 2   
+
+  53   2              // Read character sent from PC
+  54   2              received_char = uart_rx_char();
+  55   2      
+  56   2              // Echo back to PC with confirmation
+  57   2              uart_tx_string("Received: '");
+  58   2              uart_tx_char(received_char);
+  59   2              uart_tx_string("'\r\n");
+  60   2      
+  61   2              // Also display on Port 1 LEDs
+  62   2              P1 = ~received_char;
+  63   2          }
+  64   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    151    ----
+   CONSTANT SIZE    =    227    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

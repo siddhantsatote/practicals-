@@ -1,0 +1,21 @@
+================================================================================
+EXPERIMENT 04: STEPPER MOTOR / L293D DRIVER CIRCUIT
+================================================================================
+
+Microcontroller: 8051
+Driver IC: ULN2003A (Darlington Array) or L293D (Dual H-Bridge)
+Motor: 5-Wire Unipolar / 4-Wire Bipolar Stepper Motor
+
+Wiring:
+  8051 Pin         Driver Pin          Motor Coil
+  -------------------------------------------------------------
+  P2.0 (Pin 21) -> IN1 (Pin 1)      -> Phase A (Coil 1)
+  P2.1 (Pin 22) -> IN2 (Pin 2)      -> Phase B (Coil 2)
+  P2.2 (Pin 23) -> IN3 (Pin 3)      -> Phase C (Coil 3)
+  P2.3 (Pin 24) -> IN4 (Pin 4)      -> Phase D (Coil 4)
+
+Power:
+  Driver GND (Pin 8)  -> System GND
+  Driver COM (Pin 9)  -> +12V Motor Power Supply
+  Driver OUT1-OUT4    -> Connected to stepper motor winding leads
+================================================================================

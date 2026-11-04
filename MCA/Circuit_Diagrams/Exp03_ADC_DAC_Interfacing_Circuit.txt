@@ -1,0 +1,22 @@
+================================================================================
+EXPERIMENT 03: ADC0804 AND DAC0808 INTERFACING CIRCUIT
+================================================================================
+
+Part A: ADC0804 (Analog-to-Digital Converter)
+  8051 Pin         ADC0804 Pin         Signal Name
+  -------------------------------------------------------------
+  P1.0 - P1.7   <- DB0 - DB7 (Pins 18-11) Digital Data Output
+  P3.6 (Pin 16) -> WR (Pin 3)          Start of Conversion (SOC)
+  P3.7 (Pin 17) -> RD (Pin 2)          Output Enable / Read
+  P3.2 (Pin 12) <- INTR (Pin 5)        End of Conversion (EOC)
+  GND           -> CS (Pin 1)          Chip Select (Active Low)
+  +5V           -> VCC (Pin 20)        Power Supply
+  Analog In     -> Vin(+) (Pin 6)      0 - 5V Analog Sensor Input
+
+Part B: DAC0808 (Digital-to-Analog Converter)
+  8051 Pin         DAC0808 Pin         Signal Name
+  -------------------------------------------------------------
+  P2.0 - P2.7   -> A1 - A8 (Pins 5-12) Digital Input Data Bus
+  DAC Iout      -> Op-Amp LM741 Pin 2  Current to Voltage Converter
+  Op-Amp Pin 6  -> Oscilloscope / CRO  Analog Waveform Output
+================================================================================

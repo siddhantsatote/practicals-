@@ -1,0 +1,61 @@
+A51 MACRO ASSEMBLER  SEVEN_SEG                                                            11/04/2026 18:14:49 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp02_Multiplexed_7Segment\Output\Exp02_Multiplexed_7Segment_ASM.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp02_Multiplexed_7S
+                      egment\seven_seg.asm OBJECT(c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp02_Multiplexed_7
+                      Segment\Output\Exp02_Multiplexed_7Segment_ASM.obj) PRINT(c:\Users\admin\Desktop\praticals\MCA\Keil
+                      _Projects\Exp02_Multiplexed_7Segment\Listings\Exp02_Multiplexed_7Segment_ASM.lst) 
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ; ==============================================================================
+                       2     ; Experiment 02: Multiplexed 7-Segment Display (8051 Assembly)
+                       3     ; ==============================================================================
+                       4     
+0000                   5     ORG 0000H
+                       6     
+0000                   7     START:
+                       8         ; Display digit '1' on Display 1 (P3.0 High, P3.1 Low)
+0000 D2B0              9         SETB P3.0
+0002 C2B1             10         CLR  P3.1
+0004 759006           11         MOV  P1, #06H        ; Pattern for '1'
+0007 1114             12         ACALL DELAY_1MS
+                      13     
+                      14         ; Display digit '6' on Display 2 (P3.0 Low, P3.1 High)
+0009 C2B0             15         CLR  P3.0
+000B D2B1             16         SETB P3.1
+000D 75907D           17         MOV  P1, #7DH        ; Pattern for '6'
+0010 1114             18         ACALL DELAY_1MS
+                      19     
+0012 80EC             20         SJMP START
+                      21     
+0014                  22     DELAY_1MS:
+0014 7A02             23         MOV R2, #2
+0016 7BFA             24     D1: MOV R3, #250
+0018 DBFE             25     D2: DJNZ R3, D2
+001A DAFA             26         DJNZ R2, D1
+001C 22               27         RET
+                      28     
+                      29     END
+A51 MACRO ASSEMBLER  SEVEN_SEG                                                            11/04/2026 18:14:49 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+D1 . . . . . . . .  C ADDR   0016H   A   
+D2 . . . . . . . .  C ADDR   0018H   A   
+DELAY_1MS. . . . .  C ADDR   0014H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+START. . . . . . .  C ADDR   0000H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

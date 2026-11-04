@@ -1,0 +1,34 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    11/04/2026  18:14:51  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP09_UART_SERIAL_COMMUNICATION\OUTPUT\EX
+>> P09_UART_SERIAL_COMMUNICATION.OBJ TO C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP09_UART_SERIAL_COMMUNICATI
+>> ON\OUTPUT\EXP09_UART_SERIAL_COMMUNICATION.ABS PRINT (c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp09_UART_Se
+>> rial_Communication\Listings\Exp09_UART_Serial_Communication.m51)
+
+
+INPUT MODULES INCLUDED:
+  C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP09_UART_SERIAL_COMMUNICATION\OUTPUT\EXP09_UART_SERIAL_COMMUNICAT
+>> ION.OBJ (UART_COMM)
+
+
+LINK MAP OF MODULE:  C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP09_UART_SERIAL_COMMUNICATION\OUTPUT\EXP09_UAR
+>> T_SERIAL_COMMUNICATION.ABS (UART_COMM)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     001DH     ABSOLUTE     
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 001DH BYTE ( 1%) *
+******************************************************************************
+
+Program Size: data=8.0 xdata=0 code=29
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

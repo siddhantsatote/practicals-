@@ -1,0 +1,34 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    11/04/2026  18:14:51  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP08_TIMER_SQUARE_WAVE_INTERRUPT\OUTPUT\
+>> EXP08_TIMER_SQUARE_WAVE_INTERRUPT_ASM.OBJ TO C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP08_TIMER_SQUARE_WA
+>> VE_INTERRUPT\OUTPUT\EXP08_TIMER_SQUARE_WAVE_INTERRUPT_ASM.ABS PRINT (c:\Users\admin\Desktop\praticals\MCA\Keil_Projec
+>> ts\Exp08_Timer_Square_Wave_Interrupt\Listings\Exp08_Timer_Square_Wave_Interrupt_ASM.m51)
+
+
+INPUT MODULES INCLUDED:
+  C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP08_TIMER_SQUARE_WAVE_INTERRUPT\OUTPUT\EXP08_TIMER_SQUARE_WAVE_IN
+>> TERRUPT_ASM.OBJ (SQUARE_WAVE)
+
+
+LINK MAP OF MODULE:  C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP08_TIMER_SQUARE_WAVE_INTERRUPT\OUTPUT\EXP08_T
+>> IMER_SQUARE_WAVE_INTERRUPT_ASM.ABS (SQUARE_WAVE)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0013H     ABSOLUTE     
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0013H BYTE ( 0%) *
+******************************************************************************
+
+Program Size: data=8.0 xdata=0 code=19
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

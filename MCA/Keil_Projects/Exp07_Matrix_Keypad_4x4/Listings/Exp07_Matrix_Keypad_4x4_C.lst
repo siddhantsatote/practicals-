@@ -1,0 +1,100 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              11/04/2026 18:14:50 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp07_Matrix_Keypad_4x4\Output\Exp07_Matrix_Keypad_4x4_C.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp07_Matrix_Keypad_4
+                    -x4\main.c OBJECT(c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp07_Matrix_Keypad_4x4\Output\Exp07_Matrix_Keypad_4
+                    -x4_C.obj) PRINT(c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp07_Matrix_Keypad_4x4\Listings\Exp07_Matrix_Keypad_
+                    -4x4_C.lst) INCDIR(C:\Keil_v5\C51\INC)
+
+line level    source
+
+   1          /*
+   2           * Experiment 07: Interfacing 4x4 Matrix Keypad to 8051 Microcontroller
+   3           * Keypad Port: Port 1 (P1)
+   4           *   Rows:    P1.0 - P1.3 (Inputs with internal pull-ups)
+   5           *   Columns: P1.4 - P1.7 (Outputs grounded sequentially during scan)
+   6           * Display Port: Port 2 (Displays 7-Segment pattern or ASCII character)
+   7           */
+   8          
+   9          #include <reg51.h>
+  10          
+  11          #define KEYPAD_PORT P1
+  12          #define DISPLAY_PORT P2
+  13          
+  14          // Keypad layout lookup table
+  15          unsigned char code key_map[4][4] = {
+  16              {'1', '2', '3', 'A'},
+  17              {'4', '5', '6', 'B'},
+  18              {'7', '8', '9', 'C'},
+  19              {'*', '0', '#', 'D'}
+  20          };
+  21          
+  22          // 7-segment codes for key characters
+  23          unsigned char code seg_lut[] = {
+  24              0x3F, 0x06, 0x5B, 0x4F, // 0, 1, 2, 3
+  25              0x66, 0x6D, 0x7D, 0x07, // 4, 5, 6, 7
+  26              0x7F, 0x6F, 0x77, 0x7C, // 8, 9, A, B
+  27              0x39, 0x5E              // C, D
+  28          };
+  29          
+  30          void delay_ms(unsigned int ms) {
+  31   1          unsigned int i, j;
+  32   1          for (i = 0; i < ms; i++)
+  33   1              for (j = 0; j < 120; j++);
+  34   1      }
+  35          
+  36          // Scans 4x4 keypad and returns detected key character, or 0 if no key pressed
+  37          unsigned char keypad_scan(void) {
+  38   1          unsigned char col, row;
+  39   1          unsigned char col_mask;
+  40   1      
+  41   1          for (col = 0; col < 4; col++) {
+  42   2              // Drive one column LOW, others HIGH: 0xEF, 0xDF, 0xBF, 0x7F
+  43   2              col_mask = ~(0x10 << col);
+  44   2              KEYPAD_PORT = col_mask | 0x0F; // keep rows (P1.0-P1.3) pulled high
+  45   2      
+  46   2              // Check each row
+  47   2              if ((KEYPAD_PORT & 0x01) == 0) { row = 0; goto KEY_FOUND; }
+  48   2              if ((KEYPAD_PORT & 0x02) == 0) { row = 1; goto KEY_FOUND; }
+  49   2              if ((KEYPAD_PORT & 0x04) == 0) { row = 2; goto KEY_FOUND; }
+  50   2              if ((KEYPAD_PORT & 0x08) == 0) { row = 3; goto KEY_FOUND; }
+  51   2          }
+  52   1          return 0; // No key pressed
+C51 COMPILER V9.60.7.0   MAIN                                                              11/04/2026 18:14:50 PAGE 2   
+
+  53   1      
+  54   1      KEY_FOUND:
+  55   1          delay_ms(20); // Debounce
+  56   1          while ((KEYPAD_PORT & 0x0F) != 0x0F); // Wait for key release
+  57   1          delay_ms(20);
+  58   1          return key_map[row][col];
+  59   1      }
+  60          
+  61          void main(void) {
+  62   1          unsigned char key;
+  63   1          DISPLAY_PORT = 0x00;
+  64   1      
+  65   1          while (1) {
+  66   2              key = keypad_scan();
+  67   2              if (key != 0) {
+  68   3                  // Output ASCII code of key to display port
+  69   3                  DISPLAY_PORT = key;
+  70   3              }
+  71   2          }
+  72   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    161    ----
+   CONSTANT SIZE    =     30    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       1
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

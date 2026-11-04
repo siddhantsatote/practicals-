@@ -1,0 +1,98 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    11/04/2026  18:14:50  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP06_LCD_16X2_INTERFACING\OUTPUT\EXP06_L
+>> CD_16X2_INTERFACING.OBJ TO C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP06_LCD_16X2_INTERFACING\OUTPUT\EXP06
+>> _LCD_16X2_INTERFACING.ABS PRINT (c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp06_LCD_16x2_Interfacing\Listin
+>> gs\Exp06_LCD_16x2_Interfacing.m51)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP06_LCD_16X2_INTERFACING\OUTPUT\EXP06_LCD_16X2_INTERFACING.OBJ (M
+>> AIN)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C?CLDPTR)
+
+
+LINK MAP OF MODULE:  C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP06_LCD_16X2_INTERFACING\OUTPUT\EXP06_LCD_16X2
+>> _INTERFACING.ABS (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0003H     UNIT         _DATA_GROUP_
+            IDATA   000BH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     0028H     UNIT         ?PR?_DELAY_MS?MAIN
+            CODE    0828H     0028H     UNIT         ?PR?MAIN?MAIN
+            CODE    0850H     0027H     UNIT         ?PR?LCD_INIT?MAIN
+            CODE    0877H     0025H     UNIT         ?PR?_LCD_STRING?MAIN
+            CODE    089CH     001FH     UNIT         ?CO?MAIN
+            CODE    08BBH     0019H     UNIT         ?C?LIB_CODE
+            CODE    08D4H     000CH     UNIT         ?PR?_LCD_CMD?MAIN
+            CODE    08E0H     000CH     UNIT         ?PR?_LCD_DATA_CHAR?MAIN
+            CODE    08ECH     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP06_LCD_16X2_INTERFACING\OUTPUT\EXP06_LCD_
+>> 16X2_INTERFACING.ABS (MAIN)
+
+
+SEGMENT                           DATA_GROUP 
+  +--> CALLED SEGMENT           START    LENGTH
+-----------------------------------------------
+?C_C51STARTUP                   -----    -----
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN                   -----    -----
+  +--> ?PR?LCD_INIT?MAIN
+  +--> ?PR?_LCD_CMD?MAIN
+  +--> ?CO?MAIN
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  11/04/2026  18:14:50  PAGE 2
+
+
+  +--> ?PR?_LCD_STRING?MAIN
+  +--> ?PR?_DELAY_MS?MAIN
+
+?PR?LCD_INIT?MAIN               -----    -----
+  +--> ?PR?_DELAY_MS?MAIN
+  +--> ?PR?_LCD_CMD?MAIN
+
+?PR?_LCD_CMD?MAIN               -----    -----
+  +--> ?PR?_DELAY_MS?MAIN
+
+?PR?_LCD_STRING?MAIN            0008H    0003H
+  +--> ?PR?_LCD_DATA_CHAR?MAIN
+
+?PR?_LCD_DATA_CHAR?MAIN         -----    -----
+  +--> ?PR?_DELAY_MS?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP06_LCD_16X2_INTERFACING\OUTPUT\EXP06_LCD_
+>> 16X2_INTERFACING.ABS (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C?CLDPTR
+  C:08BBH         PUBLIC        ?C?CLDPTR
+  -------         ENDMOD        ?C?CLDPTR
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 00D3H BYTE (10%) *
+******************************************************************************
+
+Program Size: data=12.0 xdata=0 code=251
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

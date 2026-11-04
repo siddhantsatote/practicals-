@@ -1,0 +1,82 @@
+A51 MACRO ASSEMBLER  MEMORY_OPS                                                           11/04/2026 18:05:04 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Output\memory_ops.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE memory_ops.asm SET(SMALL) DEBUG PRINT(.\Listings\memory_ops.lst) OBJECT
+                      (.\Output\memory_ops.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ; ==============================================================================
+                       2     ; Experiment 01: Memory Transfer & Arithmetic Operations (8051 Assembly)
+                       3     ; Alard College of Engineering & Management - MCA Lab
+                       4     ; ==============================================================================
+                       5     
+0000                   6     ORG 0000H
+                       7     
+                       8     ; Part 1: Memory Transfer using Addressing Modes
+0000 7423              9         MOV A, #23H         ; Immediate addressing
+0002 7930             10         MOV R1, #30H        ; Load pointer into R1
+0004 F7               11         MOV @R1, A          ; Indirect addressing: Store 23H at memory location 30H
+                      12     
+                      13     ; Part 2: Block Data Transfer with Branching Loop
+0005 7820             14         MOV R0, #20H        ; Source memory block pointer
+0007 7940             15         MOV R1, #40H        ; Destination memory block pointer
+0009 7F05             16         MOV R7, #05H        ; Loop counter (5 bytes)
+                      17     
+000B                  18     UP:
+000B E6               19         MOV A, @R0          ; Read byte from source
+000C F7               20         MOV @R1, A          ; Write byte to destination
+000D 08               21         INC R0              ; Increment source pointer
+000E 09               22         INC R1              ; Increment destination pointer
+000F DFFA             23         DJNZ R7, UP         ; Decrement counter and jump if not zero
+                      24     
+                      25     ; Part 3: Arithmetic Operations
+                      26         ; 1. Addition
+0011 7402             27         MOV A, #02H
+0013 2403             28         ADD A, #03H         ; A = 05H
+0015 F8               29         MOV R0, A           ; Store addition result
+                      30     
+                      31         ; 2. Subtraction
+0016 C3               32         CLR C               ; Clear carry/borrow flag
+0017 7405             33         MOV A, #05H
+0019 9402             34         SUBB A, #02H        ; A = 03H
+001B F9               35         MOV R1, A           ; Store subtraction result
+                      36     
+                      37         ; 3. Multiplication
+001C 7403             38         MOV A, #03H
+001E 75F004           39         MOV B, #04H
+0021 A4               40         MUL AB              ; A = Lower byte (0CH), B = Upper byte (00H)
+0022 FA               41         MOV R2, A
+0023 ABF0             42         MOV R3, B
+                      43     
+                      44         ; 4. Division
+0025 7495             45         MOV A, #95H
+0027 75F010           46         MOV B, #10H
+002A 84               47         DIV AB              ; A = Quotient (09H), B = Remainder (05H)
+002B FC               48         MOV R4, A
+002C ADF0             49         MOV R5, B
+                      50     
+                      51     ; Endless loop to halt execution cleanly in Keil (prevents Error 65)
+002E                  52     HALT:
+002E 80FE             53         SJMP HALT
+                      54     
+                      55     END
+A51 MACRO ASSEMBLER  MEMORY_OPS                                                           11/04/2026 18:05:04 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+HALT . . . . . . .  C ADDR   002EH   A   
+UP . . . . . . . .  C ADDR   000BH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

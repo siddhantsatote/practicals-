@@ -1,0 +1,90 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              11/04/2026 18:14:50 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp04_Stepper_Motor_Control\Output\Exp04_Stepper_Motor_Control_C.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp04_Stepper_Motor_C
+                    -ontrol\main.c OBJECT(c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp04_Stepper_Motor_Control\Output\Exp04_Stepper
+                    -_Motor_Control_C.obj) PRINT(c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp04_Stepper_Motor_Control\Listings\Exp0
+                    -4_Stepper_Motor_Control_C.lst) INCDIR(C:\Keil_v5\C51\INC)
+
+line level    source
+
+   1          /*
+   2           * Experiment 04: Stepper Motor Interfacing with 8051 using Timer Delay
+   3           * Motor connected to Port 2 (P2.0 - P2.3) via ULN2003 / L293D driver IC
+   4           * Supports Clockwise, Counter-Clockwise, and Speed control via Timer
+   5           */
+   6          
+   7          #include <reg51.h>
+   8          
+   9          #define MOTOR_PORT P2
+  10          
+  11          // 4-step sequence (Full-step mode): Coil A, B, C, D
+  12          unsigned char code step_cw[4]  = {0x09, 0x0C, 0x06, 0x03}; // Clockwise: 1001, 1100, 0110, 0011
+  13          unsigned char code step_ccw[4] = {0x03, 0x06, 0x0C, 0x09}; // Counter-Clockwise
+  14          
+  15          // Software delay using 8051 Timer 0
+  16          void timer0_delay(unsigned int count) {
+  17   1          while (count--) {
+  18   2              TMOD = (TMOD & 0xF0) | 0x01; // Timer 0, Mode 1 (16-bit timer)
+  19   2              TL0 = 0x00;
+  20   2              TH0 = 0xDC;                  // Delay approx 10 ms at 11.0592 MHz
+  21   2              TR0 = 1;                     // Start Timer 0
+  22   2              while (TF0 == 0);            // Wait for overflow
+  23   2              TR0 = 0;                     // Stop Timer 0
+  24   2              TF0 = 0;                     // Clear overflow flag
+  25   2          }
+  26   1      }
+  27          
+  28          void rotate_clockwise(unsigned int rotations) {
+  29   1          unsigned int i;
+  30   1          unsigned char s;
+  31   1          for (i = 0; i < rotations * 48; i++) { // approx 48 full steps per revolution
+  32   2              for (s = 0; s < 4; s++) {
+  33   3                  MOTOR_PORT = (MOTOR_PORT & 0xF0) | step_cw[s];
+  34   3                  timer0_delay(2); // 20 ms step delay
+  35   3              }
+  36   2          }
+  37   1      }
+  38          
+  39          void rotate_counter_clockwise(unsigned int rotations) {
+  40   1          unsigned int i;
+  41   1          unsigned char s;
+  42   1          for (i = 0; i < rotations * 48; i++) {
+  43   2              for (s = 0; s < 4; s++) {
+  44   3                  MOTOR_PORT = (MOTOR_PORT & 0xF0) | step_ccw[s];
+  45   3                  timer0_delay(2);
+  46   3              }
+  47   2          }
+  48   1      }
+  49          
+  50          void main(void) {
+  51   1          MOTOR_PORT = 0x00;
+  52   1      
+C51 COMPILER V9.60.7.0   MAIN                                                              11/04/2026 18:14:50 PAGE 2   
+
+  53   1          while (1) {
+  54   2              // Rotate 2 revolutions Clockwise
+  55   2              rotate_clockwise(2);
+  56   2              timer0_delay(50); // Pause for 500 ms
+  57   2      
+  58   2              // Rotate 2 revolutions Counter-Clockwise
+  59   2              rotate_counter_clockwise(2);
+  60   2              timer0_delay(50); // Pause for 500 ms
+  61   2          }
+  62   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    175    ----
+   CONSTANT SIZE    =      8    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       4
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

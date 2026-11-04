@@ -1,0 +1,65 @@
+A51 MACRO ASSEMBLER  UART_COMM                                                            11/04/2026 18:14:51 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp09_UART_Serial_Communication\Output\Exp09_UART_Serial_Communication_ASM.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp09_UART_Serial_Co
+                      mmunication\uart_comm.asm OBJECT(c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp09_UART_Ser
+                      ial_Communication\Output\Exp09_UART_Serial_Communication_ASM.obj) PRINT(c:\Users\admin\Desktop\pra
+                      ticals\MCA\Keil_Projects\Exp09_UART_Serial_Communication\Listings\Exp09_UART_Serial_Communication_ASM.lst) 
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ; ==============================================================================
+                       2     ; Experiment 09: Serial Port Communication (8051 Assembly)
+                       3     ; Page 52 of Alard College MCA Lab Manual
+                       4     ; ==============================================================================
+                       5     
+0000                   6     ORG 0000H
+                       7     
+0000                   8     START:
+0000 759850            9         MOV SCON, #50H      ; Mode 1, 8-bit UART, REN enabled
+0003 758920           10         MOV TMOD, #20H      ; Timer 1 Mode 2 (8-bit auto-reload)
+0006 758DFD           11         MOV TH1, #-3        ; 9600 baud rate (0FDH)
+0009 D28E             12         SETB TR1            ; Start Timer 1
+                      13     
+000B                  14     AGAIN:
+000B 759949           15         MOV SBUF, #'I'      ; Send character 'I' as per lab manual
+000E                  16     WAIT_TX:
+000E 3099FD           17         JNB TI, WAIT_TX     ; Wait for TI flag
+0011 C299             18         CLR TI              ; Clear TI flag
+                      19     
+                      20         ; Optional delay between transmissions
+0013 7A64             21         MOV R2, #100
+0015 7BFA             22     D1: MOV R3, #250
+0017 DBFE             23     D2: DJNZ R3, D2
+0019 DAFA             24         DJNZ R2, D1
+                      25     
+001B 80EE             26         SJMP AGAIN
+                      27     
+                      28     END
+A51 MACRO ASSEMBLER  UART_COMM                                                            11/04/2026 18:14:51 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+AGAIN. . . . . . .  C ADDR   000BH   A   
+D1 . . . . . . . .  C ADDR   0015H   A   
+D2 . . . . . . . .  C ADDR   0017H   A   
+SBUF . . . . . . .  D ADDR   0099H   A   
+SCON . . . . . . .  D ADDR   0098H   A   
+START. . . . . . .  C ADDR   0000H   A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TI . . . . . . . .  B ADDR   0098H.1 A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+WAIT_TX. . . . . .  C ADDR   000EH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

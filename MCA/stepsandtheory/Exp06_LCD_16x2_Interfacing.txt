@@ -1,0 +1,21 @@
+================================================================================
+EXPERIMENT 06: 16x2 LCD DISPLAY INTERFACING
+================================================================================
+
+1. AIM:
+   To interface a 16x2 alphanumeric LCD display (HD44780 controller) to 8051 / PIC18F
+   and display custom text messages.
+
+2. COMMANDS SUMMARY:
+   - 0x38: 2 lines, 5x7 matrix, 8-bit mode
+   - 0x0E: Display ON, cursor ON
+   - 0x0C: Display ON, cursor OFF
+   - 0x01: Clear LCD display screen
+   - 0x06: Auto-increment cursor position
+   - 0x80: Set cursor to Line 1, Column 1
+   - 0xC0: Set cursor to Line 2, Column 1
+
+3. VIVA QUESTIONS & ANSWERS:
+   Q1: What is the function of the RS (Register Select) pin on HD44780?
+   A1: RS=0 selects the Command Register (instructions); RS=1 selects the Data Register (characters).
+================================================================================

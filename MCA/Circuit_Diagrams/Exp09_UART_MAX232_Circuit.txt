@@ -1,0 +1,16 @@
+================================================================================
+EXPERIMENT 09: UART SERIAL COMMUNICATION WITH PC (MAX232)
+================================================================================
+
+8051 Pin         MAX232 Pin          DB9 Female / USB-TTL PC Port
+--------------------------------------------------------------------------------
+P3.1 / TXD (11)-> T1IN (Pin 11)   -> T1OUT (Pin 14) -> RXD (DB9 Pin 2)
+P3.0 / RXD (10)<- R1OUT (Pin 12)  <- R1IN (Pin 13)  <- TXD (DB9 Pin 3)
+GND (Pin 20)   -> GND (Pin 15)                      -> GND (DB9 Pin 5)
+
+MAX232 Charge Pump Capacitors:
+  C1(+) to C1(-) -> 1 uF / 16V electrolytic
+  C2(+) to C2(-) -> 1 uF / 16V electrolytic
+  V+ to GND      -> 1 uF / 16V electrolytic
+  V- to GND      -> 1 uF / 16V electrolytic
+================================================================================

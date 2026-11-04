@@ -1,0 +1,34 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    11/04/2026  18:14:50  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP04_STEPPER_MOTOR_CONTROL\OUTPUT\EXP04_
+>> STEPPER_MOTOR_CONTROL_ASM.OBJ TO C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP04_STEPPER_MOTOR_CONTROL\OUTPU
+>> T\EXP04_STEPPER_MOTOR_CONTROL_ASM.ABS PRINT (c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp04_Stepper_Motor_C
+>> ontrol\Listings\Exp04_Stepper_Motor_Control_ASM.m51)
+
+
+INPUT MODULES INCLUDED:
+  C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP04_STEPPER_MOTOR_CONTROL\OUTPUT\EXP04_STEPPER_MOTOR_CONTROL_ASM.
+>> OBJ (STEPPER)
+
+
+LINK MAP OF MODULE:  C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP04_STEPPER_MOTOR_CONTROL\OUTPUT\EXP04_STEPPER
+>> _MOTOR_CONTROL_ASM.ABS (STEPPER)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0023H     ABSOLUTE     
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0023H BYTE ( 1%) *
+******************************************************************************
+
+Program Size: data=8.0 xdata=0 code=35
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

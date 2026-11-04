@@ -1,0 +1,66 @@
+A51 MACRO ASSEMBLER  STEPPER                                                              11/04/2026 18:14:50 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp04_Stepper_Motor_Control\Output\Exp04_Stepper_Motor_Control.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp04_Stepper_Motor_
+                      Control\stepper.asm OBJECT(c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp04_Stepper_Motor_
+                      Control\Output\Exp04_Stepper_Motor_Control.obj) PRINT(c:\Users\admin\Desktop\praticals\MCA\Keil_Pr
+                      ojects\Exp04_Stepper_Motor_Control\Listings\Exp04_Stepper_Motor_Control.lst) 
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ; ==============================================================================
+                       2     ; Experiment 04: Stepper Motor Interfacing (8051 Assembly)
+                       3     ; Port 2 (P2.0-P2.3) connected to ULN2003 Driver
+                       4     ; ==============================================================================
+                       5     
+0000                   6     ORG 0000H
+                       7     
+0000                   8     START:
+                       9         ; Step 1: 09H (Coils 1 & 4)
+0000 75A009           10         MOV P2, #09H
+0003 1116             11         ACALL DELAY
+                      12         ; Step 2: 0CH (Coils 1 & 2)
+0005 75A00C           13         MOV P2, #0CH
+0008 1116             14         ACALL DELAY
+                      15         ; Step 3: 06H (Coils 2 & 3)
+000A 75A006           16         MOV P2, #06H
+000D 1116             17         ACALL DELAY
+                      18         ; Step 4: 03H (Coils 3 & 4)
+000F 75A003           19         MOV P2, #03H
+0012 1116             20         ACALL DELAY
+                      21     
+0014 80EA             22         SJMP START
+                      23     
+                      24     ; Delay subroutine using registers
+0016                  25     DELAY:
+0016 7A14             26         MOV R2, #20
+0018 7BC8             27     D1: MOV R3, #200
+001A 7CE6             28     D2: MOV R4, #230
+001C DCFE             29     D3: DJNZ R4, D3
+001E DBFA             30         DJNZ R3, D2
+0020 DAF6             31         DJNZ R2, D1
+0022 22               32         RET
+                      33     
+                      34     END
+A51 MACRO ASSEMBLER  STEPPER                                                              11/04/2026 18:14:50 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+D1 . . . . . . . .  C ADDR   0018H   A   
+D2 . . . . . . . .  C ADDR   001AH   A   
+D3 . . . . . . . .  C ADDR   001CH   A   
+DELAY. . . . . . .  C ADDR   0016H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+START. . . . . . .  C ADDR   0000H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

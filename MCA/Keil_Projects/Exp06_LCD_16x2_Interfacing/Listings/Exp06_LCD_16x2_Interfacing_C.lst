@@ -1,0 +1,103 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              11/04/2026 18:14:50 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp06_LCD_16x2_Interfacing\Output\Exp06_LCD_16x2_Interfacing_C.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp06_LCD_16x2_Interf
+                    -acing\main.c OBJECT(c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp06_LCD_16x2_Interfacing\Output\Exp06_LCD_16x2_
+                    -Interfacing_C.obj) PRINT(c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp06_LCD_16x2_Interfacing\Listings\Exp06_LC
+                    -D_16x2_Interfacing_C.lst) INCDIR(C:\Keil_v5\C51\INC)
+
+line level    source
+
+   1          /*
+   2           * Experiment 06: Interfacing 16x2 Alphanumeric LCD to 8051 Microcontroller
+   3           * LCD Data lines D0-D7 connected to Port 2 (P2.0 - P2.7)
+   4           * Control lines:
+   5           *   RS (Register Select) = P3.5 (0 = Command, 1 = Data)
+   6           *   RW (Read / Write)    = P3.6 (0 = Write, 1 = Read)
+   7           *   EN (Enable)          = P3.7 (High-to-Low pulse)
+   8           */
+   9          
+  10          #include <reg51.h>
+  11          
+  12          #define LCD_DATA P2
+  13          
+  14          sbit LCD_RS = P3^5;
+  15          sbit LCD_RW = P3^6;
+  16          sbit LCD_EN = P3^7;
+  17          
+  18          void delay_ms(unsigned int ms) {
+  19   1          unsigned int i, j;
+  20   1          for (i = 0; i < ms; i++)
+  21   1              for (j = 0; j < 120; j++);
+  22   1      }
+  23          
+  24          void lcd_cmd(unsigned char cmd) {
+  25   1          LCD_DATA = cmd;
+  26   1          LCD_RS = 0;         // Command Register
+  27   1          LCD_RW = 0;         // Write operation
+  28   1          LCD_EN = 1;
+  29   1          delay_ms(2);
+  30   1          LCD_EN = 0;         // Falling edge latch
+  31   1          delay_ms(2);
+  32   1      }
+  33          
+  34          void lcd_data_char(unsigned char ch) {
+  35   1          LCD_DATA = ch;
+  36   1          LCD_RS = 1;         // Data Register
+  37   1          LCD_RW = 0;         // Write operation
+  38   1          LCD_EN = 1;
+  39   1          delay_ms(2);
+  40   1          LCD_EN = 0;         // Falling edge latch
+  41   1          delay_ms(2);
+  42   1      }
+  43          
+  44          void lcd_init(void) {
+  45   1          delay_ms(20);       // Wait for LCD power-up
+  46   1          lcd_cmd(0x38);      // 2 lines, 5x7 matrix, 8-bit mode
+  47   1          lcd_cmd(0x0C);      // Display ON, Cursor OFF
+  48   1          lcd_cmd(0x06);      // Auto-increment cursor
+  49   1          lcd_cmd(0x01);      // Clear display screen
+  50   1          delay_ms(5);
+  51   1          lcd_cmd(0x80);      // Force cursor to beginning of Line 1
+  52   1      }
+C51 COMPILER V9.60.7.0   MAIN                                                              11/04/2026 18:14:50 PAGE 2   
+
+  53          
+  54          void lcd_string(char *str) {
+  55   1          while (*str) {
+  56   2              lcd_data_char(*str++);
+  57   2          }
+  58   1      }
+  59          
+  60          void main(void) {
+  61   1          lcd_init();
+  62   1      
+  63   1          // Line 1
+  64   1          lcd_cmd(0x80);
+  65   1          lcd_string("ALARD ENGG COLL");
+  66   1      
+  67   1          // Line 2
+  68   1          lcd_cmd(0xC0);
+  69   1          lcd_string("MCA LAB - 8051");
+  70   1      
+  71   1          while (1) {
+  72   2              // Blink indicator or hold display
+  73   2              delay_ms(1000);
+  74   2          }
+  75   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    180    ----
+   CONSTANT SIZE    =     31    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

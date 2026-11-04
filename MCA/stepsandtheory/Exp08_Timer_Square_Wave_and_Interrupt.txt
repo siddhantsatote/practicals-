@@ -1,0 +1,28 @@
+================================================================================
+EXPERIMENT 08: SQUARE WAVE GENERATION USING TIMER & INTERRUPT
+================================================================================
+
+1. AIM:
+   To generate a precise square wave (50% duty cycle, 50 Hz / 20 ms period)
+   on port pin P1.0 using 8051 Timer 0 in Mode 1 with hardware interrupt.
+
+2. CALCULATION:
+   - Crystal Frequency Fosc = 11.0592 MHz
+   - Timer Clock = 11.0592 MHz / 12 = 921.6 kHz
+   - Period of one timer tick = 1.085 us
+   - For 50 Hz wave (20 ms period), half period Thalf = 10 ms.
+   - Count N = 10 ms / 1.085 us = 9216 counts.
+   - Timer reload = 65536 - 9216 = 56320 = 0xDC00 (TH0 = 0xDC, TL0 = 0x00).
+
+3. REGISTERS USED:
+   - TMOD = 0x01 (Timer 0 in Mode 1, 16-bit mode)
+   - IE = 0x82 (EA = 1, ET0 = 1: Enable Timer 0 Interrupt)
+   - TCON = 0x10 (TR0 = 1: Start Timer 0)
+
+4. VIVA QUESTIONS & ANSWERS:
+   Q1: What is the vector address for Timer 0 interrupt?
+   A1: 000BH in code memory.
+   Q2: What is the advantage of using Timer Interrupt over polling software delay loops?
+   A2: Interrupt-driven timing does not block the CPU. The CPU can execute main background tasks while
+       the hardware timer automatically triggers the ISR only when the delay period expires.
+================================================================================

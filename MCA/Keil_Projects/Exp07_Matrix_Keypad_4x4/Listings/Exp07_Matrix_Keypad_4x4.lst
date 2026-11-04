@@ -1,0 +1,124 @@
+A51 MACRO ASSEMBLER  KEYPAD                                                               11/04/2026 18:14:50 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp07_Matrix_Keypad_4x4\Output\Exp07_Matrix_Keypad_4x4.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp07_Matrix_Keypad_
+                      4x4\keypad.asm OBJECT(c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp07_Matrix_Keypad_4x4\O
+                      utput\Exp07_Matrix_Keypad_4x4.obj) PRINT(c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp07_
+                      Matrix_Keypad_4x4\Listings\Exp07_Matrix_Keypad_4x4.lst) 
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ; ==============================================================================
+                       2     ; Experiment 07: 4x4 Matrix Keypad Interfacing (8051 Assembly)
+                       3     ; ==============================================================================
+                       4     
+0000                   5     ORG 0000H
+                       6     
+0000                   7     START:
+                       8         ; Scan Column 1 (P1.4 = 0)
+0000 7590EF            9         MOV P1, #0EFH
+0003 309029           10         JNB P1.0, K_1
+0006 30913B           11         JNB P1.1, K_4
+0009 30924D           12         JNB P1.2, K_7
+000C 309366           13         JNB P1.3, K_STAR
+                      14     
+                      15         ; Scan Column 2 (P1.5 = 0)
+000F 7590DF           16         MOV P1, #0DFH
+0012 309021           17         JNB P1.0, K_2
+0015 309133           18         JNB P1.1, K_5
+0018 309245           19         JNB P1.2, K_8
+001B 309350           20         JNB P1.3, K_0
+                      21     
+                      22         ; Scan Column 3 (P1.6 = 0)
+001E 7590BF           23         MOV P1, #0BFH
+0021 309019           24         JNB P1.0, K_3
+0024 30912B           25         JNB P1.1, K_6
+0027 30923D           26         JNB P1.2, K_9
+002A 30934F           27         JNB P1.3, K_HASH
+                      28     
+002D 80D1             29         SJMP START
+                      30     
+002F 75A006           31     K_1: MOV P2, #06H ; Display '1'
+0032 1183             32          ACALL DELAY
+0034 80CA             33          SJMP START
+0036 75A05B           34     K_2: MOV P2, #5BH ; Display '2'
+0039 1183             35          ACALL DELAY
+003B 80C3             36          SJMP START
+003D 75A04F           37     K_3: MOV P2, #4FH ; Display '3'
+0040 1183             38          ACALL DELAY
+0042 80BC             39          SJMP START
+0044 75A066           40     K_4: MOV P2, #66H ; Display '4'
+0047 1183             41          ACALL DELAY
+0049 80B5             42          SJMP START
+004B 75A06D           43     K_5: MOV P2, #6DH ; Display '5'
+004E 1183             44          ACALL DELAY
+0050 80AE             45          SJMP START
+0052 75A07D           46     K_6: MOV P2, #7DH ; Display '6'
+0055 1183             47          ACALL DELAY
+0057 80A7             48          SJMP START
+0059 75A007           49     K_7: MOV P2, #07H ; Display '7'
+005C 1183             50          ACALL DELAY
+005E 80A0             51          SJMP START
+0060 75A07F           52     K_8: MOV P2, #7FH ; Display '8'
+0063 1183             53          ACALL DELAY
+0065 8099             54          SJMP START
+0067 75A06F           55     K_9: MOV P2, #6FH ; Display '9'
+A51 MACRO ASSEMBLER  KEYPAD                                                               11/04/2026 18:14:50 PAGE     2
+
+006A 1183             56          ACALL DELAY
+006C 8092             57          SJMP START
+006E 75A03F           58     K_0: MOV P2, #3FH ; Display '0'
+0071 1183             59          ACALL DELAY
+0073 808B             60          SJMP START
+0075 75A077           61     K_STAR: MOV P2, #77H
+0078 1183             62          ACALL DELAY
+007A 8084             63          SJMP START
+007C 75A07C           64     K_HASH: MOV P2, #7CH
+007F 1183             65          ACALL DELAY
+0081 807D             66          SJMP START
+*** ___________________________________^
+*** ERROR #A51 IN 66 (c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp07_Matrix_Keypad_4x4\keypad.asm, LINE 66): T
+                             ARGET OUT OF RANGE
+                      67     
+0083                  68     DELAY:
+0083 7A64             69         MOV R2, #100
+0085 7BFA             70     D1: MOV R3, #250
+0087 DBFE             71     D2: DJNZ R3, D2
+0089 DAFA             72         DJNZ R2, D1
+008B 22               73         RET
+                      74     
+                      75     END
+A51 MACRO ASSEMBLER  KEYPAD                                                               11/04/2026 18:14:50 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+D1 . . . . . . . .  C ADDR   0085H   A   
+D2 . . . . . . . .  C ADDR   0087H   A   
+DELAY. . . . . . .  C ADDR   0083H   A   
+K_0. . . . . . . .  C ADDR   006EH   A   
+K_1. . . . . . . .  C ADDR   002FH   A   
+K_2. . . . . . . .  C ADDR   0036H   A   
+K_3. . . . . . . .  C ADDR   003DH   A   
+K_4. . . . . . . .  C ADDR   0044H   A   
+K_5. . . . . . . .  C ADDR   004BH   A   
+K_6. . . . . . . .  C ADDR   0052H   A   
+K_7. . . . . . . .  C ADDR   0059H   A   
+K_8. . . . . . . .  C ADDR   0060H   A   
+K_9. . . . . . . .  C ADDR   0067H   A   
+K_HASH . . . . . .  C ADDR   007CH   A   
+K_STAR . . . . . .  C ADDR   0075H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+START. . . . . . .  C ADDR   0000H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 1 ERROR(S)

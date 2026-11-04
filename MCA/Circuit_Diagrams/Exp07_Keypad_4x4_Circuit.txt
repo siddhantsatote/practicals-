@@ -1,0 +1,16 @@
+================================================================================
+EXPERIMENT 07: 4x4 MATRIX KEYPAD INTERFACING CIRCUIT
+================================================================================
+
+8051 Pin         Keypad Pin             Description
+--------------------------------------------------------------------------------
+P1.0 (Pin 1)  <- Row 1 (R1)             Input with internal pull-up (Key: 1, 2, 3, A)
+P1.1 (Pin 2)  <- Row 2 (R2)             Input with internal pull-up (Key: 4, 5, 6, B)
+P1.2 (Pin 3)  <- Row 3 (R3)             Input with internal pull-up (Key: 7, 8, 9, C)
+P1.3 (Pin 4)  <- Row 4 (R4)             Input with internal pull-up (Key: *, 0, #, D)
+P1.4 (Pin 5)  -> Column 1 (C1)          Driven LOW to scan Column 1
+P1.5 (Pin 6)  -> Column 2 (C2)          Driven LOW to scan Column 2
+P1.6 (Pin 7)  -> Column 3 (C3)          Driven LOW to scan Column 3
+P1.7 (Pin 8)  -> Column 4 (C4)          Driven LOW to scan Column 4
+P2.0 - P2.7   -> Display Port           Shows decoded key code on LEDs / 7-Segment
+================================================================================

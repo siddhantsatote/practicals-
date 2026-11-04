@@ -1,0 +1,68 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    11/04/2026  18:14:50  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP07_MATRIX_KEYPAD_4X4\OUTPUT\EXP07_MATR
+>> IX_KEYPAD_4X4_C.OBJ TO C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP07_MATRIX_KEYPAD_4X4\OUTPUT\EXP07_MATRIX
+>> _KEYPAD_4X4_C.ABS PRINT (c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp07_Matrix_Keypad_4x4\Listings\Exp07_Ma
+>> trix_Keypad_4x4_C.m51)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP07_MATRIX_KEYPAD_4X4\OUTPUT\EXP07_MATRIX_KEYPAD_4X4_C.OBJ (MAIN)
+>> 
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP07_MATRIX_KEYPAD_4X4\OUTPUT\EXP07_MATRIX_KEYP
+>> AD_4X4_C.ABS (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0001H     UNIT         _DATA_GROUP_
+            IDATA   0009H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     0074H     UNIT         ?PR?KEYPAD_SCAN?MAIN
+            CODE    0874H     0020H     UNIT         ?PR?_DELAY_MS?MAIN
+            CODE    0894H     001EH     UNIT         ?CO?MAIN
+            CODE    08B2H     000DH     UNIT         ?PR?MAIN?MAIN
+            CODE    08BFH     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP07_MATRIX_KEYPAD_4X4\OUTPUT\EXP07_MATRIX_
+>> KEYPAD_4X4_C.ABS (MAIN)
+
+
+SEGMENT                          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?C_C51STARTUP                  -----    -----
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN                  -----    -----
+  +--> ?PR?KEYPAD_SCAN?MAIN
+
+?PR?KEYPAD_SCAN?MAIN           0008H    0001H
+  +--> ?PR?_DELAY_MS?MAIN
+  +--> ?CO?MAIN
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 00BFH BYTE ( 9%) *
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  11/04/2026  18:14:50  PAGE 2
+
+
+******************************************************************************
+
+Program Size: data=10.0 xdata=0 code=206
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

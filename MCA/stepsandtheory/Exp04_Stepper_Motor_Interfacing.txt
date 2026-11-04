@@ -1,0 +1,28 @@
+================================================================================
+EXPERIMENT 04: STEPPER MOTOR INTERFACING WITH 8051
+================================================================================
+
+1. AIM:
+   To interface a stepper motor with 8051 using ULN2003 / L293D driver and control
+   its rotation direction (CW/CCW) and speed using timer-based delays.
+
+2. THEORY:
+   - Stepper motor rotates in discrete angular steps per input electrical pulse.
+   - Standard 4-step sequence (Full-Step Mode):
+     Step 1: 0x09 (Coil A & D active)
+     Step 2: 0x0C (Coil A & B active)
+     Step 3: 0x06 (Coil B & C active)
+     Step 4: 0x03 (Coil C & D active)
+   - Clockwise (CW): Step 1 -> Step 2 -> Step 3 -> Step 4 -> Repeat.
+   - Counter-Clockwise (CCW): Step 4 -> Step 3 -> Step 2 -> Step 1 -> Repeat.
+   - Speed control: Shorter delay between steps increases speed; longer delay decreases speed.
+   - Driver requirement: 8051 output pins cannot supply the 500mA coil current; ULN2003
+     Darlington array provides the required current drive.
+
+3. VIVA QUESTIONS & ANSWERS:
+   Q1: What is the step angle of a 200-step stepper motor?
+   A1: Step Angle = 360 degrees / 200 = 1.8 degrees per step.
+   Q2: Why is a flyback diode needed when driving stepper motor coils?
+   A2: Coils are inductive loads; when switched off, they produce large back-EMF spikes that could
+       damage transistors. ULN2003 contains built-in internal clamp diodes.
+================================================================================

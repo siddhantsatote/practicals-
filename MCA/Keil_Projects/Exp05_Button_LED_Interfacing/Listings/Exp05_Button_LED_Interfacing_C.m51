@@ -1,0 +1,72 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    11/04/2026  18:14:50  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP05_BUTTON_LED_INTERFACING\OUTPUT\EXP05
+>> _BUTTON_LED_INTERFACING_C.OBJ TO C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP05_BUTTON_LED_INTERFACING\OUTP
+>> UT\EXP05_BUTTON_LED_INTERFACING_C.ABS PRINT (c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp05_Button_LED_Inte
+>> rfacing\Listings\Exp05_Button_LED_Interfacing_C.m51)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP05_BUTTON_LED_INTERFACING\OUTPUT\EXP05_BUTTON_LED_INTERFACING_C.
+>> OBJ (MAIN)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP05_BUTTON_LED_INTERFACING\OUTPUT\EXP05_BUTTON
+>> _LED_INTERFACING_C.ABS (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0001H     UNIT         _DATA_GROUP_
+            IDATA   0009H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     0026H     UNIT         ?PR?MAIN?MAIN
+            CODE    0826H     0020H     UNIT         ?PR?_DELAY_MS?MAIN
+            CODE    0846H     001CH     UNIT         ?PR?LED_CHASER?MAIN
+            CODE    0862H     0010H     UNIT         ?PR?LED_BLINK_ALL?MAIN
+            CODE    0872H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP05_BUTTON_LED_INTERFACING\OUTPUT\EXP05_BU
+>> TTON_LED_INTERFACING_C.ABS (MAIN)
+
+
+SEGMENT                          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?C_C51STARTUP                  -----    -----
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN                  -----    -----
+  +--> ?PR?_DELAY_MS?MAIN
+  +--> ?PR?LED_CHASER?MAIN
+  +--> ?PR?LED_BLINK_ALL?MAIN
+
+?PR?LED_CHASER?MAIN            0008H    0001H
+  +--> ?PR?_DELAY_MS?MAIN
+
+?PR?LED_BLINK_ALL?MAIN         -----    -----
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  11/04/2026  18:14:50  PAGE 2
+
+
+  +--> ?PR?_DELAY_MS?MAIN
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0072H BYTE ( 5%) *
+******************************************************************************
+
+Program Size: data=10.0 xdata=0 code=129
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,89 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    11/04/2026  18:14:50  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP04_STEPPER_MOTOR_CONTROL\OUTPUT\EXP04_
+>> STEPPER_MOTOR_CONTROL_C.OBJ TO C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP04_STEPPER_MOTOR_CONTROL\OUTPUT\
+>> EXP04_STEPPER_MOTOR_CONTROL_C.ABS PRINT (c:\Users\admin\Desktop\praticals\MCA\Keil_Projects\Exp04_Stepper_Motor_Contr
+>> ol\Listings\Exp04_Stepper_Motor_Control_C.m51)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP04_STEPPER_MOTOR_CONTROL\OUTPUT\EXP04_STEPPER_MOTOR_CONTROL_C.OB
+>> J (MAIN)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C?IMUL)
+
+
+LINK MAP OF MODULE:  C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP04_STEPPER_MOTOR_CONTROL\OUTPUT\EXP04_STEPPER
+>> _MOTOR_CONTROL_C.ABS (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0002H     UNIT         _DATA_GROUP_
+            IDATA   000AH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     0034H     UNIT         ?PR?_TIMER0_DELAY?MAIN
+            CODE    0834H     002DH     UNIT         ?PR?_ROTATE_CLOCKWISE?MAIN
+            CODE    0861H     002DH     UNIT         ?PR?_ROTATE_COUNTER_CLOCKWISE?MAIN
+            CODE    088EH     0021H     UNIT         ?PR?MAIN?MAIN
+            CODE    08AFH     0012H     UNIT         ?C?LIB_CODE
+            CODE    08C1H     000CH     UNIT         ?C_C51STARTUP
+            CODE    08CDH     0008H     UNIT         ?CO?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP04_STEPPER_MOTOR_CONTROL\OUTPUT\EXP04_STE
+>> PPER_MOTOR_CONTROL_C.ABS (MAIN)
+
+
+SEGMENT                                      DATA_GROUP 
+  +--> CALLED SEGMENT                      START    LENGTH
+----------------------------------------------------------
+?C_C51STARTUP                              -----    -----
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN                              -----    -----
+  +--> ?PR?_ROTATE_CLOCKWISE?MAIN
+  +--> ?PR?_TIMER0_DELAY?MAIN
+  +--> ?PR?_ROTATE_COUNTER_CLOCKWISE?MAIN
+
+?PR?_ROTATE_CLOCKWISE?MAIN                 0008H    0002H
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  11/04/2026  18:14:50  PAGE 2
+
+
+  +--> ?CO?MAIN
+  +--> ?PR?_TIMER0_DELAY?MAIN
+
+?PR?_ROTATE_COUNTER_CLOCKWISE?MAIN         0008H    0002H
+  +--> ?CO?MAIN
+  +--> ?PR?_TIMER0_DELAY?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  C:\USERS\ADMIN\DESKTOP\PRATICALS\MCA\KEIL_PROJECTS\EXP04_STEPPER_MOTOR_CONTROL\OUTPUT\EXP04_STE
+>> PPER_MOTOR_CONTROL_C.ABS (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C?IMUL
+  C:08AFH         PUBLIC        ?C?IMUL
+  -------         ENDMOD        ?C?IMUL
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 00B7H BYTE ( 8%) *
+******************************************************************************
+
+Program Size: data=11.0 xdata=0 code=216
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

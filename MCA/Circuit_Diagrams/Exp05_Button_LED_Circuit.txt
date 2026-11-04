@@ -1,0 +1,12 @@
+================================================================================
+EXPERIMENT 05: BUTTON AND LED INTERFACING CIRCUIT
+================================================================================
+
+8051 Pin         Component              Connection Details
+--------------------------------------------------------------------------------
+P1.0 - P1.7   -> 8 LEDs (D1 - D8)    -> Connected to LED cathodes via 280 ohm
+                                        resistors. LED anodes to +5V (Active Low)
+P3.2 (Pin 12) <- Push Button S1      -> Connected between P3.2 and GND.
+                                        10k ohm pull-up resistor to +5V.
+                                        (Press = Logic 0, Release = Logic 1)
+================================================================================

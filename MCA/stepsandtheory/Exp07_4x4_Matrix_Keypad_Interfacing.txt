@@ -1,0 +1,18 @@
+================================================================================
+EXPERIMENT 07: 4x4 MATRIX KEYPAD INTERFACING
+================================================================================
+
+1. AIM:
+   To interface a 4x4 matrix keypad to 8051 and decode the pressed key.
+
+2. THEORY & SCANNING ALGORITHM:
+   - 4 Rows (P1.0-P1.3) and 4 Columns (P1.4-P1.7) form a matrix of 16 keys.
+   - Column scanning: Drive one column LOW at a time (0xEF, 0xDF, 0xBF, 0x7F).
+   - Check which row input reads LOW.
+   - The intersection of the active LOW column and LOW row uniquely identifies the pressed key.
+   - Lookup table translates row and column coordinates into ASCII characters.
+
+3. VIVA QUESTIONS & ANSWERS:
+   Q1: How many pins are saved by using a matrix keypad?
+   A1: 16 individual switches would require 16 pins. A 4x4 matrix requires only 8 pins (50% reduction).
+================================================================================

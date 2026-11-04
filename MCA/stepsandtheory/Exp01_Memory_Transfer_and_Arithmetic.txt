@@ -1,0 +1,41 @@
+================================================================================
+EXPERIMENT 01: SIMPLE PROGRAMS ON MEMORY TRANSFER & ARITHMETIC OPERATIONS
+================================================================================
+
+1. AIM:
+   To study and write 8051 Assembly Language & Embedded C programs for:
+   a) Data transfer using different addressing modes (Immediate, Direct, Indirect).
+   b) Block data transfer between internal memory locations using loop instructions.
+   c) Arithmetic operations: Addition (ADD), Subtraction with borrow (SUBB),
+      Multiplication (MUL AB), and Division (DIV AB).
+
+2. APPARATUS & TOOLS:
+   - Keil uVision5 IDE (C51 Toolchain)
+   - 8051 Simulator / Target AT89C51 Microcontroller
+
+3. THEORY & ADDRESSING MODES:
+   - Immediate Addressing: Operand is specified directly in the instruction (e.g., MOV A, #23H).
+   - Direct Addressing: 8-bit RAM address specified directly (e.g., MOV 30H, A).
+   - Indirect Addressing: Memory pointer in registers R0 or R1 (e.g., MOV @R1, A).
+   - Register Addressing: Direct manipulation of registers R0-R7 (e.g., MOV A, R2).
+
+4. STEP-BY-STEP PROCEDURE IN KEIL uVISION5:
+   1. Launch Keil uVision5 and open 'Exp01_Memory_Transfer.uvproj'.
+   2. Click 'Project -> Build Target' (or press F7) to compile. Check for 0 Errors, 0 Warnings.
+   3. Start the Debug Session: Click 'Debug -> Start/Stop Debug Session' (or Ctrl+F5).
+   4. Open 'View -> Memory Window -> Memory 1'. Type 'D:0x20' or 'D:0x30' in Address bar.
+   5. Open 'View -> Registers Window' to observe Accumulator (A), B, R0-R7, and PSW flags.
+   6. Step through code line-by-line using 'Debug -> Step' (F11).
+   7. Observe the contents of memory locations and registers updating in real time.
+   8. Press Ctrl+F5 to exit debug session.
+
+5. VIVA QUESTIONS & ANSWERS:
+   Q1: What is the capacity of internal RAM in standard 8051?
+   A1: 128 bytes (00H to 7FH), divided into 4 Register Banks (00H-1FH), Bit-addressable RAM (20H-2FH),
+       and General Purpose Scratchpad RAM (30H-7FH).
+   Q2: Why is 'CLR C' necessary before 'SUBB A, src'?
+   A2: 8051 does not have a plain SUB instruction; it only has SUBB (Subtract with Borrow).
+       Clearing the Carry flag (CY) ensures no previous borrow affects the current subtraction.
+   Q3: Where are the results of 'MUL AB' stored?
+   A3: Lower 8 bits of the product are in Accumulator (A), higher 8 bits in Register B.
+================================================================================
